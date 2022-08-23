@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using Shop.Application.Functions.Categories.Commands;
+using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Categories.Queries.GetCategoryDetail;
 using Shop.Application.Functions.Products.Commands.CreateProduct;
 using Shop.Application.Functions.Products.Queries.GetProductDetail;
 using Shop.Application.Functions.Products.Queries.GetProductsList;
+using Shop.Application.Functions.Users.Queries.GetUserDetail;
 using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Shop.Application.Mapper
             CreateMap<Category, CategoryViewModel>().ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
 
         }
     }

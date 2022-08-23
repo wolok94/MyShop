@@ -8,6 +8,6 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
 {
     public class CreateUserCommandHandler
     {
-
+        int a;
     }
 }

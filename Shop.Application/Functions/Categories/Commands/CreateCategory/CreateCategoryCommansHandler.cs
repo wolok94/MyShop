@@ -21,9 +21,9 @@ namespace Shop.Application.Functions.Categories.Commands.CreateCategory
         }
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = _mapper.Map<Category>(request);
-            await _categoryRepository.AddAsync(category);
-            return category.Id;
+            var categoryToCreate = _mapper.Map<Category>(request);
+            await _categoryRepository.AddAsync(categoryToCreate);
+            return categoryToCreate.Id;
         }
     }
 }
