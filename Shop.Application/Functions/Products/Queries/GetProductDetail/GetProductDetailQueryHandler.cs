@@ -20,11 +20,11 @@ namespace Shop.Application.Functions.Products.GetProductDetail
             _mapper = mapper;
             _repository = repository;
         }
-        public Task<ProductViewModel> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
+        public async Task<ProductViewModel> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var product = _repository.GetByIdAsync(request.Id);
+            var product = await _repository.GetByIdAsync(request.Id);
             var mappedProduct = _mapper.Map<ProductViewModel>(product);
-            return Task.FromResult(mappedProduct);
+            return mappedProduct;
 
         }
     }
