@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Functions.Users.Commands.CreateUser
+namespace Shop.Application.Functions.Orders.Command.CreateOrder
 {
-    public class CreateUserCommandHandler
+    public class CreateOrderCommandHandler
     {
-        
+
     }
 }
