@@ -3,6 +3,7 @@ using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Categories.Queries.GetCategoryDetail;
 using Shop.Application.Functions.Comments.Command.CreateComment;
 using Shop.Application.Functions.Comments.Queries.GetInList;
+using Shop.Application.Functions.Orders.Command.CreateOrder;
 using Shop.Application.Functions.Products.Commands.CreateProduct;
 using Shop.Application.Functions.Products.Commands.UpdateProduct;
 using Shop.Application.Functions.Products.Queries.GetProductDetail;
@@ -32,6 +33,7 @@ namespace Shop.Application.Mapper
             CreateMap<CommentsView, Comment>().ReverseMap()
                 .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName);
             CreateMap<CreateCommentCommand, Comment>().ReverseMap();
+            CreateMap<OrderToSend, CreateOrderCommand>().ReverseMap();
 
         }
     }

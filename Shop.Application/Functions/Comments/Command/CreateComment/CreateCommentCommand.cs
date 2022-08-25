@@ -9,6 +9,6 @@ namespace Shop.Application.Functions.Comments.Command.CreateComment
 {
     public class CreateCommentCommand : IRequest<int>
     {
-
+        public string Description { get; set; }
     }
 }
