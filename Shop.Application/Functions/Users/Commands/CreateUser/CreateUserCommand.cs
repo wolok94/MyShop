@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<int>
     {
-
+        public string Email { get; set; }
+        public string NickName { get; set; }
+        public string hashedPassword { get; set; }
+        public Address Address { get; set; }
     }
 }
