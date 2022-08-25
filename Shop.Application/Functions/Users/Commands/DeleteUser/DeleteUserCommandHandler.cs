@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Commands.DeleteUser
 {
-    public class DeleteUserCommandHandler
+    public class DeleteUserCommandHandler : IRequest<DeleteUserCommand>
     {
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<User> _userRepository;
