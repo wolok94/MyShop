@@ -14,16 +14,16 @@ namespace Shop.Application.Functions.Orders.UpdateOrder
     public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<Order> _commentRepository;
-        public UpdateOrderCommandHandler(IMapper mapper, IAsyncRepository<Order> commentRepository)
+        private readonly IAsyncRepository<OrderToSend> _commentRepository;
+        public UpdateOrderCommandHandler(IMapper mapper, IAsyncRepository<OrderToSend> commentRepository)
         {
             _mapper = mapper;
             _commentRepository = commentRepository;
         }
         public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            var comment = _mapper.Map<Comment>(request);
-            await _commentRepository.UpdateAsync(comment);
+            var order = _mapper.Map<OrderToSend>(request);
+            await _commentRepository.UpdateAsync(order);
             return Unit.Value;
         }
     }
