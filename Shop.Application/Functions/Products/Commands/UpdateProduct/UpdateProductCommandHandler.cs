@@ -21,7 +21,7 @@ namespace Shop.Application.Functions.Products.Commands.UpdateProduct
         }
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var productToUpdate = await _productRepository.GetByIdAsync(request.Id);
+            var productToUpdate = _mapper.Map<Product>(request);
             await _productRepository.UpdateAsync(productToUpdate);
             return Unit.Value;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Contracts.Persistence
 {
-    public interface IOrderRepository : IAsyncRepository<Order>
+    public interface IOrderRepository : IAsyncRepository<OrderToSend>
     {
 
     }

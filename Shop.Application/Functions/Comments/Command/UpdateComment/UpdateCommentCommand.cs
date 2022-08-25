@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Functions.Orders.Command.DeleteOrder
+namespace Shop.Application.Functions.Comments.Command.UpdateComment
 {
-    public class DeleteOrderCommand : IRequest
+    public class UpdateCommentCommand : IRequest
     {
-        public int Id { get; set; }
+
     }
 }

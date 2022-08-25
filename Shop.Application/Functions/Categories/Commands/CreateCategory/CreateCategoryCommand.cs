@@ -9,6 +9,6 @@ namespace Shop.Application.Functions.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommand : IRequest<int>
     {
-
+        public string Name { get; set; }
     }
 }

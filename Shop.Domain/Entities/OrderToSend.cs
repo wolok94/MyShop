@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain.Entities
 {
-    public class Order
+    public class OrderToSend
     {
         public int Id { get; set; }
         public Basket Basket { get; set; }
