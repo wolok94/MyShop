@@ -8,6 +8,6 @@ namespace Shop.Application.Functions.Users.Commands.DeleteUser
 {
     public class DeleteUserCommand
     {
-
+        public int Id { get; set; }
     }
 }
