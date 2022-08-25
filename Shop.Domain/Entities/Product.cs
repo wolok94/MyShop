@@ -14,6 +14,8 @@ namespace Shop.Domain.Entities
         public double Price { get; set; }
         public int HowManyTimesOrdered { get; set; }
         public int InStock { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public List<Comment> Comments { get; set; }
         public string ImageUrl { get; set; }
         

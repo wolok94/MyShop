@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Functions.Users.Commands.UpdateUser
+namespace Shop.Application.Functions.Orders.UpdateOrder
 {
-    public class UpdateUserCommand : IRequest
+    public class UpdateOrderCommand : IRequest
     {
 
     }

@@ -10,6 +10,7 @@ namespace Shop.Domain.Entities
     {
 
         public string Email { get; set; }
+        public string NickName { get; set; }
         public string hashedPassword { get; set; }
         public Address Address { get; set; }
     }

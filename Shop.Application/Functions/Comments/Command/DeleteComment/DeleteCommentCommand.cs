@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Functions.Users.Commands.DeleteUser
+namespace Shop.Application.Functions.Comments.Command.DeleteComment
 {
-    public class DeleteUserCommand : IRequest
+    public class DeleteCommentCommand : IRequest
     {
         public int Id { get; set; }
     }

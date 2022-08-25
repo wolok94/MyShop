@@ -13,7 +13,6 @@ namespace Shop.Application.Functions.Products.Commands.DeleteProduct
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
     {
         private readonly IAsyncRepository<Product> _repository;
-        private readonly IMapper _mapper;
         public DeleteProductCommandHandler(IMapper _mapper, IAsyncRepository<Product> repository)
         {
             _repository = repository;

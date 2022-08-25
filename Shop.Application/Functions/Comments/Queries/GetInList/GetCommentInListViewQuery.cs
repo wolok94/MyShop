@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Functions.Orders.Queries.GetOrderDetail
+namespace Shop.Application.Functions.Comments.Queries.GetInList
 {
-    public class GetOrderDetailQuery : IRequest<OrderToSend>
+    public class GetCommentInListViewQuery : IRequest<List<CommentsView>>
     {
-        public int Id { get; set; }
+
     }
 }

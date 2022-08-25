@@ -21,7 +21,7 @@ namespace Shop.Application.Functions.Categories.Commands.UpdateCategory
         }
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryToUpdate = await _categoryRepository.GetByIdAsync(request.Id);
+            var categoryToUpdate = _mapper.Map<Category>(request);
             await _categoryRepository.UpdateAsync(categoryToUpdate);
             return Unit.Value;
         }

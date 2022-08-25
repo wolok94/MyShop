@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Categories.Commands.CreateCategory
 {
-    public class CreateCategoryCommansHandler : IRequestHandler<CreateCategoryCommand, int>
+    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
     {
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<Category> _categoryRepository;
-        public CreateCategoryCommansHandler(IMapper mapper, IAsyncRepository<Category> categoryRepository)
+        public CreateCategoryCommandHandler(IMapper mapper, IAsyncRepository<Category> categoryRepository)
         {
             _mapper = mapper;
             _categoryRepository = categoryRepository;
