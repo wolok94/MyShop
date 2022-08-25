@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Orders.Command.CreateOrder
 {
-    public class CreateOrderValidation : AbstractValidator<CreateOrderCommand>
+    public class CreateOrderValidator : AbstractValidator<CreateOrderCommand>
     {
-        public CreateOrderValidation()
+        public CreateOrderValidator()
         {
             RuleFor(o => o.BasketId)
                 .NotEmpty()

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Shop.Application.Contracts.Persistence;
+using Shop.Application.Functions.Categories.Commands.CreateCategory;
+using Shop.Application.Functions.Exceptions;
 using Shop.Application.Functions.Orders.Command.CreateOrder;
 using Shop.Domain.Entities;
 using System;
@@ -23,6 +25,13 @@ namespace Shop.Application.Functions.Orders.Command.CreateOrder
         }
         public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreateOrderValidator();
+            var validatorResult = await validator.ValidateAsync(request);
+
+            if (!validatorResult.IsValid)
+            {
+                throw new ValidationShopException(validatorResult);
+            }
             var order = _mapper.Map<OrderToSend>(request);
             order = await _orderRepository.AddAsync(order);
             return order.Id;
