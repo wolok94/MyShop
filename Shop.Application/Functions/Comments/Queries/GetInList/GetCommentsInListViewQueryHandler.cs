@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Comments.Queries.GetInList
 {
-    public class GetCommentsInListViewQueryHandler : IRequestHandler<GetCommentInListViewQuery, List<CommentsView>
+    public class GetCommentsInListViewQueryHandler : IRequestHandler<GetCommentInListViewQuery, List<CommentsView>>
     {
         private readonly IMapper _mapper;
         private IAsyncRepository<Comment> _commentRepository;

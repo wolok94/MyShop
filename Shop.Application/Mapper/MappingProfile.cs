@@ -31,7 +31,7 @@ namespace Shop.Application.Mapper
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<CommentsView, Comment>().ReverseMap()
-                .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName);
+                .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName));
             CreateMap<CreateCommentCommand, Comment>().ReverseMap();
             CreateMap<OrderToSend, CreateOrderCommand>().ReverseMap();
 

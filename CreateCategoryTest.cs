@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Domain.Entities
+namespace Command
 {
-    public class Admin : User
+    public class CreateCategoryTest
     {
-        public string ShopName { get; set; }
+        
     }
 }
