@@ -24,6 +24,23 @@ namespace Shop.Application.UnitTest.Helper
 
             mockRepository.Setup(x => x.GetAll()).ReturnsAsync(comments);
 
+            mockRepository.Setup(x => x.DeleteAsync(It.IsAny<Comment>())).Callback<Comment>((entity) =>
+            {
+                comments.Remove(entity);
+            });
+
+            mockRepository.Setup(x => x.UpdateAsync(It.IsAny<Comment>())).Callback<Comment>((entity) =>
+            {
+                comments.Remove(entity);
+                comments.Add(entity);
+            });
+
+            mockRepository.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+                return comments.FirstOrDefault(x => x.Id == id);
+            });
+
+
             return mockRepository;
         }
 
