@@ -69,3 +69,6 @@ Shop.Application.UnitTest/bin/Debug/net6.0/EmptyFiles/image/empty.pgm
 Shop.Application.UnitTest/bin/Debug/net6.0/EmptyFiles/image/empty.png
 Shop.Application.UnitTest/bin/Debug/net6.0/EmptyFiles/image/empty.ppm
 Shop.Application.UnitTest/bin/Debug/net6.0/EmptyFiles/image/empty.rle
+Shop.Persistence.EF/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+Shop.Persistence.EF/obj/Debug/net6.0/Shop.Persistence.EF.AssemblyInfo.cs
+Shop.Persistence.EF/obj/Debug/net6.0/Shop.Persistence.EF.GlobalUsings.g.cs
