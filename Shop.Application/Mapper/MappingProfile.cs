@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
+using Shop.Application.Functions.Categories.Queries.GetCategoriesList;
 using Shop.Application.Functions.Categories.Queries.GetCategoryDetail;
 using Shop.Application.Functions.Comments.Command.CreateComment;
+using Shop.Application.Functions.Comments.Command.UpdateComment;
 using Shop.Application.Functions.Comments.Queries.GetInList;
 using Shop.Application.Functions.Orders.Command.CreateOrder;
 using Shop.Application.Functions.Products.Commands.CreateProduct;
@@ -27,11 +29,12 @@ namespace Shop.Application.Mapper
             CreateMap<Product, CreateProductCommand>().ReverseMap();
             CreateMap<Product, UpdateProductCommand>().ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
-            CreateMap<Category, CategoryViewModel>().ReverseMap();
+            CreateMap<Category, CategoryInListViewModel>().ReverseMap();
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<CommentsView, Comment>().ReverseMap()
-                .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName);
+                .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName));
+            CreateMap<UpdateCommentCommand, Comment>();
             CreateMap<CreateCommentCommand, Comment>().ReverseMap();
             CreateMap<OrderToSend, CreateOrderCommand>().ReverseMap();
 
