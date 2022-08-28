@@ -23,7 +23,7 @@ namespace Shop.Persistence.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShopContext).Assembly);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Shop.Domain.Entities
         public User User { get; set; }
         public int UserId { get; set; }
         public string Description { get; set; }
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

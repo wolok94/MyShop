@@ -13,5 +13,6 @@ namespace Shop.Domain.Entities
         public string NickName { get; set; }
         public string hashedPassword { get; set; }
         public Address Address { get; set; }
+
     }
 }

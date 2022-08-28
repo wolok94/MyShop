@@ -13,5 +13,7 @@ namespace Shop.Domain.Entities
         public string Street { get; set; }
         public string HouseNumber { get; set; }
         public string PostalCode { get; set; }
+        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }
