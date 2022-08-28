@@ -31,7 +31,8 @@ namespace Shop.Application.UnitTest.Helper
 
             mockRepository.Setup(x => x.UpdateAsync(It.IsAny<Comment>())).Callback<Comment>((entity) =>
             {
-                comments.Remove(entity);
+                var comment = comments.FirstOrDefault(x => x.Id == entity.Id);
+                comments.Remove(comment);
                 comments.Add(entity);
             });
 
