@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.UnitTest.Categories
+namespace Shop.Application.UnitTest.Categories.Commands
 {
     public class CreateCategoryTest
     {
@@ -44,7 +44,7 @@ namespace Shop.Application.UnitTest.Categories
             var allCategories = (await _mockRepository.Object.GetAll()).Count;
 
             allCategories.Should().Be(allCategoriesBeforeCount + 1);
-            
+
         }
     }
 }

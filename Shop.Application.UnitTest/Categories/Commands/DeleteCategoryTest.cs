@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.UnitTest.Categories
+namespace Shop.Application.UnitTest.Categories.Commands
 {
     public class DeleteCategoryTest
     {
@@ -42,8 +42,8 @@ namespace Shop.Application.UnitTest.Categories
             await handler.Handle(command, CancellationToken.None);
             var allCategories = (await _mockRepository.Object.GetAll()).Count;
 
-            allCategories.Should().Be(allCategoriesBeforeCount -1 );
-            
+            allCategories.Should().Be(allCategoriesBeforeCount - 1);
+
 
         }
     }

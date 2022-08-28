@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
+using Shop.Application.Functions.Categories.Queries.GetCategoriesList;
 using Shop.Application.Functions.Categories.Queries.GetCategoryDetail;
 using Shop.Application.Functions.Comments.Command.CreateComment;
 using Shop.Application.Functions.Comments.Queries.GetInList;
@@ -27,7 +28,7 @@ namespace Shop.Application.Mapper
             CreateMap<Product, CreateProductCommand>().ReverseMap();
             CreateMap<Product, UpdateProductCommand>().ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
-            CreateMap<Category, CategoryViewModel>().ReverseMap();
+            CreateMap<Category, CategoryInListViewModel>().ReverseMap();
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<CommentsView, Comment>().ReverseMap()
