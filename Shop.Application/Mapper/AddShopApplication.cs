@@ -11,7 +11,7 @@ namespace Shop.Application.Mapper
 {
     public static class AddShopApplication
     {
-        public static IServiceCollection Install(this IServiceCollection services)
+        public static IServiceCollection InstallShopApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
