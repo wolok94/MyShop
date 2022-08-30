@@ -10,7 +10,7 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class OrderRepository : BaseRepository<OrderToSend>, IOrderRepository
     {
-        public OrderRepository(ShopContext dbContext) : base(dbContext)
+        public OrderRepository(ShopDbContext dbContext) : base(dbContext)
         {
 
         }

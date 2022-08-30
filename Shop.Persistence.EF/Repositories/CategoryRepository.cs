@@ -10,7 +10,7 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        public CategoryRepository(ShopContext dbContext) : base(dbContext)
+        public CategoryRepository(ShopDbContext dbContext) : base(dbContext)
         {
                 
         }

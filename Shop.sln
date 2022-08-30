@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application", "Shop.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application.UnitTest", "Shop.Application.UnitTest\Shop.Application.UnitTest.csproj", "{0A59C564-B0A1-4D7C-AAAB-78D705E73FBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Persistence.EF", "Shop.Persistence.EF\Shop.Persistence.EF.csproj", "{24C18E57-2462-416F-9632-F72D3B93F603}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Persistence.EF", "Shop.Persistence.EF\Shop.Persistence.EF.csproj", "{24C18E57-2462-416F-9632-F72D3B93F603}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api", "Shop.Api\Shop.Api.csproj", "{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{24C18E57-2462-416F-9632-F72D3B93F603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C18E57-2462-416F-9632-F72D3B93F603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C18E57-2462-416F-9632-F72D3B93F603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{0B452D23-5B53-4C17-9125-F2E09508751B} = {EF91FD49-E4DE-4FE5-8DFA-9BF1E6237E7F}
 		{0A59C564-B0A1-4D7C-AAAB-78D705E73FBF} = {70FAE20E-F73A-4440-8F8F-27B34BB05954}
 		{24C18E57-2462-416F-9632-F72D3B93F603} = {8428BF31-E560-4E67-8831-CABBB4B50103}
+		{480A39EC-F149-4AB3-BEE4-DC3B2693D8E4} = {DC71818E-E566-4A25-AC9E-4C635E7814BF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CB44934-20E5-4BF8-BADA-56AD60A9F347}

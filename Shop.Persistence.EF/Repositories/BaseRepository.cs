@@ -10,9 +10,9 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class BaseRepository<T> : IAsyncRepository<T> where T : class
     {
-        private readonly ShopContext _dbContext;
+        private readonly ShopDbContext _dbContext;
 
-        public BaseRepository(ShopContext dbContext)
+        public BaseRepository(ShopDbContext dbContext)
         {
             _dbContext = dbContext;
         }

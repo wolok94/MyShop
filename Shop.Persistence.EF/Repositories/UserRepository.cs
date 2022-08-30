@@ -10,7 +10,7 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(ShopContext dbContext) : base(dbContext)
+        public UserRepository(ShopDbContext dbContext) : base(dbContext)
         {
 
         }

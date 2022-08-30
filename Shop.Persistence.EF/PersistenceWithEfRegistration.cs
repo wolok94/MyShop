@@ -15,7 +15,7 @@ namespace Shop.Persistence.EF
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ShopContext>(options =>
+            services.AddDbContext<ShopDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("ShopConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();

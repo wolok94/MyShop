@@ -10,7 +10,7 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class CommentRepository : BaseRepository<Comment>, ICommentsRepository
     {
-        public CommentRepository(ShopContext dbContext) : base(dbContext)
+        public CommentRepository(ShopDbContext dbContext) : base(dbContext)
         {
 
         }
