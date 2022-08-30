@@ -9,7 +9,7 @@ namespace Shop.Domain.Entities
     public class Basket
     {
         public int Id { get; set; }
-        public Product Product { get; set; }
-        public int ProductId { get; set; }
+        public List<Product> Products { get; set; } = new List<Product>();
+
     }
 }

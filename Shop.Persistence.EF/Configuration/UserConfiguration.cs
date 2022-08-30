@@ -7,12 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Shop.Persistence.EF.Configuration
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasOne(a => a.Address)
+                .WithOne(u => u.User)
+                .HasForeignKey<User>(x => x.AddressId);
+
+
+
             builder.Property(x => x.Email)
                 .IsRequired();
 
@@ -22,8 +29,8 @@ namespace Shop.Persistence.EF.Configuration
             builder.Property(x => x.hashedPassword)
                 .IsRequired();
 
-            builder.Property(x => x.Address)
-                .IsRequired();
+
+
 
         }
     }

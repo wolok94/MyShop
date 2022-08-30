@@ -13,6 +13,8 @@ namespace Shop.Domain.Entities
         public string NickName { get; set; }
         public string hashedPassword { get; set; }
         public Address Address { get; set; }
+        public int AddressId { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }
