@@ -11,8 +11,7 @@ builder.Services.AddControllers();
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+
+
+app.MapControllers();
 app.Run();

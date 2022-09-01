@@ -9,11 +9,8 @@ namespace Shop.Application.Functions.Categories.Queries.GetCategoryDetail
 {
     public class CategoryViewModel
     {
-        public class CategoryInListViewModel
-        {
-            public int CategoryId { get; set; }
-            public string Name { get; set; }
-            public ICollection<Product> Products { get; set; }
-        }
+        public string Name { get; set; }
+        public ICollection<Product> Products { get; set; }
+
     }
 }

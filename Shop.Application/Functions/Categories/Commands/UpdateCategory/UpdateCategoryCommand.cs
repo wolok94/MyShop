@@ -10,7 +10,8 @@ namespace Shop.Application.Functions.Categories.Commands.UpdateCategory
 {
     public class UpdateCategoryCommand : IRequest
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Product> Products { get; set; }
+
     }
 }
