@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Categories.Commands.DeleteCategory;
@@ -39,6 +40,7 @@ namespace Shop.Api.Controllers
             var category = await _mediator.Send(new GetCategoryDetailsQuery() { Id = id });
             return Ok(category);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost(Name = "CreateCategory")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {

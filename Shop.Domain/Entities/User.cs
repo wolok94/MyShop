@@ -15,6 +15,8 @@ namespace Shop.Domain.Entities
         public Address Address { get; set; }
         public int AddressId { get; set; }
         public List<Comment> Comments { get; set; }
+        public Role Role { get; set; }
+        public int RoleId { get; set; } = 1;
 
     }
 }

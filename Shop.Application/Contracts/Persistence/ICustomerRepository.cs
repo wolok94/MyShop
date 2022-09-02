@@ -10,6 +10,6 @@ namespace Shop.Application.Contracts.Persistence
 {
     public interface ICustomerRepository : IAsyncRepository<Customer>
     {
-        Task<Customer> Login(LoginDto dto);
+        Task<string> Login(LoginDto dto);
     }
 }

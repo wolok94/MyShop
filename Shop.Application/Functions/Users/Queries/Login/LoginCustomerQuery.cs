@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Queries.Login
 {
-    public class LoginCustomerQuery : IRequest<Customer>
+    public class LoginCustomerQuery : IRequest<string>
     {
         public string NickName { get; set; }
         public string Password { get; set; }

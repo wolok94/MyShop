@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/customer")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -23,7 +23,8 @@ namespace Shop.Api.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet( Name = "Login")]
+        [HttpPost]
+        [Route("login")]
 
         public async Task<ActionResult<CustomerViewModel>> Login([FromBody] LoginDto customerDto)
         {

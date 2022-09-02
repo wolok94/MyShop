@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Queries.Login
 {
-    public class LoginCustomerQueryHandler : IRequestHandler<LoginCustomerQuery, Customer>
+    public class LoginCustomerQueryHandler : IRequestHandler<LoginCustomerQuery, string>
     {
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepository;
@@ -20,11 +20,11 @@ namespace Shop.Application.Functions.Users.Queries.Login
             _mapper = mapper;
             _customerRepository = customerRepository;
         }
-        public Task<Customer> Handle(LoginCustomerQuery request, CancellationToken cancellationToken)
+        public Task<string> Handle(LoginCustomerQuery request, CancellationToken cancellationToken)
         {
             var customerDto = _mapper.Map<LoginDto>(request);
-            var customer = _customerRepository.Login(customerDto);
-            return customer;
+            var token = _customerRepository.Login(customerDto);
+            return token;
         }
     }
 }

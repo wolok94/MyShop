@@ -29,6 +29,9 @@ namespace Shop.Persistence.EF.Configuration
             builder.Property(x => x.hashedPassword)
                 .IsRequired();
 
+            builder.HasOne(x => x.Role).WithMany(x => x.Users)
+                .HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.NoAction);
+
 
 
 

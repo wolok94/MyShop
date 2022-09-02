@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.Contracts.Persistence;
 using Shop.Domain.Entities;
+using Shop.Persistence.EF.JwtToken;
 using Shop.Persistence.EF.Repositories;
+using Shop.Persistence.EF.Seed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +27,10 @@ namespace Shop.Persistence.EF
             services.AddScoped<ICommentsRepository, CommentRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<ICustomerRepository, UserRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<RoleSeeder>();
             return services;
         }
     }

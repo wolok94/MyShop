@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Exceptions
 {
-    public class AuthenticateException
+    public class AuthenticateException : Exception
     {
+        public AuthenticateException(string message) : base(message)
+        {
 
+        }
     }
 }
