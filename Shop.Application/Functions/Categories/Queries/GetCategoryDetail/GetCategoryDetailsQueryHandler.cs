@@ -23,7 +23,6 @@ public class GetCategoryDetailsQueryHandler : IRequestHandler<GetCategoryDetails
     public async Task<CategoryViewModel> Handle(GetCategoryDetailsQuery request, CancellationToken cancellationToken)
     {
         var category = await _repository.GetByIdAsync(request.Id);
-        var mappedCategory = _mapper.Map<CategoryViewModel>(category);
-        return mappedCategory;
+        return _mapper.Map<CategoryViewModel>(category);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Commands.DeleteUser
 {
-    public class DeleteUserCommand : IRequest
+    public class DeleteCustomerCommand : IRequest
     {
         public int Id { get; set; }
     }

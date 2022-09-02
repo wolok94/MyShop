@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Queries.GetUserDetail
 {
-    public class UserViewModel
+    public class CustomerViewModel
     {
         public int UserId { get; set; }
         public string FirstName { get; set; }

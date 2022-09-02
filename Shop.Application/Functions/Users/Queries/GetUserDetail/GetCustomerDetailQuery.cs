@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Queries.GetUserDetail
 {
-    public class GetUserDetailQuery : IRequest<UserViewModel>
+    public class GetCustomerDetailQuery : IRequest<CustomerViewModel>
     {
         public int Id { get; set; }
     }

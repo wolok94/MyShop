@@ -18,6 +18,11 @@ namespace Shop.Persistence.EF.Configuration
 
             builder.HasOne(p => p.Product)
                 .WithMany(c => c.Comments).HasForeignKey(x => x.ProductId);
+
+            builder.HasOne(u=> u.User)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

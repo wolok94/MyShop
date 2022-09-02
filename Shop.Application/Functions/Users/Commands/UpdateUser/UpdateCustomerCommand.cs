@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Commands.UpdateUser
 {
-    public class UpdateUserCommand : IRequest
+    public class UpdateCustomerCommand : IRequest
     {
 
     }

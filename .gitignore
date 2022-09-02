@@ -72,3 +72,13 @@ Shop.Application.UnitTest/bin/Debug/net6.0/EmptyFiles/image/empty.rle
 Shop.Persistence.EF/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
 Shop.Persistence.EF/obj/Debug/net6.0/Shop.Persistence.EF.AssemblyInfo.cs
 Shop.Persistence.EF/obj/Debug/net6.0/Shop.Persistence.EF.GlobalUsings.g.cs
+*.exe
+*.sentinel
+Shop.Api/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+Shop.Api/obj/Debug/net6.0/Shop.Api.AssemblyInfo.cs
+*.CopyComplete
+Shop.Api/obj/Debug/net6.0/Shop.Api.GlobalUsings.g.cs
+.vs/Shop/config/applicationhost.config
+Shop.Persistence.EF/Migrations/20220830161405_Init.cs
+Shop.Persistence.EF/Migrations/20220830161405_Init.Designer.cs
+Shop.Persistence.EF/Migrations/ShopDbContextModelSnapshot.cs

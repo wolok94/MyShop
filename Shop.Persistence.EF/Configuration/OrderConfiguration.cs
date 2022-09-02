@@ -13,6 +13,11 @@ namespace Shop.Persistence.EF.Configuration
     {
         public void Configure(EntityTypeBuilder<OrderToSend> builder)
         {
+            builder.HasOne(u => u.User)
+                .WithOne(o => o.Order)
+                .HasForeignKey<OrderToSend>(x => x.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.Property(x => x.BasketId)
                 .IsRequired();
 
