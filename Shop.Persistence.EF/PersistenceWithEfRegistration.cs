@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.Contracts.Persistence;
+using Shop.Domain.Entities;
 using Shop.Persistence.EF.Repositories;
 using System;
 using System.Collections.Generic;
@@ -22,8 +25,8 @@ namespace Shop.Persistence.EF
             services.AddScoped<ICommentsRepository, CommentRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddScoped<ICustomerRepository, UserRepository>();
+            services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
             return services;
         }
     }

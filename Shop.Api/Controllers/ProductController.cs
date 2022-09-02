@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 
 namespace Shop.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,14 +27,14 @@ namespace Shop.Api.Controllers
 
 
         [HttpGet(Name = "GetAllproducts")]
-        public async Task<ActionResult<List<UserViewModel>>> Getproducts()
+        public async Task<ActionResult<List<CustomerViewModel>>> Getproducts()
         {
             var products = await _mediator.Send(new GetProductsListQuery());
             return Ok(products);
         }
         [HttpGet("{id}", Name = "GetProduct")]
 
-        public async Task<ActionResult<UserViewModel>> GetProduct(int id)
+        public async Task<ActionResult<CustomerViewModel>> GetProduct(int id)
         {
             var Product = await _mediator.Send(new GetProductDetailQuery() { Id = id });
             return Ok(Product);

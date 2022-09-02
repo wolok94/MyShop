@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Commands.CreateUser
 {
-    public class CreateUserValidation : AbstractValidator<CreateUserCommand>
+    public class CreateCustomerValidation : AbstractValidator<CreateCustomerCommand>
     {
-        public CreateUserValidation()
+        public CreateCustomerValidation()
         {
             RuleFor(u => u.Email)
                 .NotEmpty()
@@ -21,7 +21,7 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required");
 
-            RuleFor(u => u.hashedPassword)
+            RuleFor(u => u.Password)
                 .NotEmpty()
                 .WithMessage("Password is required");
 

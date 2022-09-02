@@ -27,14 +27,14 @@ namespace Shop.Api.Controllers
 
 
         [HttpGet(Name = "GetAllCategories")]
-        public async Task<ActionResult<List<UserViewModel>>> GetCategories()
+        public async Task<ActionResult<List<CustomerViewModel>>> GetCategories()
         {
             var categories = await _mediator.Send(new GetCategoryInListQuery());
             return Ok(categories);
         }
         [HttpGet("{id}",Name = "GetCategory")]
 
-        public async Task<ActionResult<UserViewModel>> GetCategory(int id)
+        public async Task<ActionResult<CustomerViewModel>> GetCategory(int id)
         {
             var category = await _mediator.Send(new GetCategoryDetailsQuery() { Id = id });
             return Ok(category);

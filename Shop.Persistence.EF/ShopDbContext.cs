@@ -16,7 +16,6 @@ namespace Shop.Persistence.EF
         }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Basket> Baskets { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<OrderToSend> Orders { get; set; }

@@ -11,8 +11,7 @@ namespace Shop.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Basket Basket { get; set; }
-        public int BasketId { get; set; }
         public OrderToSend Order { get; set; }
-        public int OrderId { get; set; }
+
     }
 }

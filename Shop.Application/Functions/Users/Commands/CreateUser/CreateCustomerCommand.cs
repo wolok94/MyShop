@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Users.Commands.CreateUser
 {
-    public class CreateUserCommand : IRequest<int>
+    public class CreateCustomerCommand : IRequest<int>
     {
         public string Email { get; set; }
         public string NickName { get; set; }
-        public string hashedPassword { get; set; }
+        public string Password { get; set; }
         public Address Address { get; set; }
     }
 }
