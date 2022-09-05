@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Functions.Products.Commands.CreateProduct;
 using Shop.Application.Functions.Products.Commands.DeleteProduct;
@@ -14,8 +15,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Product")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,12 +29,14 @@ namespace Shop.Api.Controllers
 
 
         [HttpGet(Name = "GetAllproducts")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CustomerViewModel>>> Getproducts()
         {
             var products = await _mediator.Send(new GetProductsListQuery());
             return Ok(products);
         }
         [HttpGet("{id}", Name = "GetProduct")]
+        [AllowAnonymous]
 
         public async Task<ActionResult<CustomerViewModel>> GetProduct(int id)
         {
@@ -40,6 +44,7 @@ namespace Shop.Api.Controllers
             return Ok(Product);
         }
         [HttpPost(Name = "CreateProduct")]
+        
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand createProductCommand)
         {
             var ProductId = await _mediator.Send(createProductCommand);
