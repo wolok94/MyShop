@@ -17,6 +17,7 @@ namespace Shop.Domain.Entities
         public Category Category { get; set; }
         public int CategoryId { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Basket> Baskets { get; set; }
         public string ImageUrl { get; set; }
         
 

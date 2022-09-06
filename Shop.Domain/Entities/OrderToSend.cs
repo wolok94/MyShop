@@ -16,7 +16,7 @@ namespace Shop.Domain.Entities
         public int UserId { get; set; }
         public Shipment Shipment { get; set; }
         public DateTime dateOfOrder { get; set; }
-        public bool isDelivered { get; set; }
+        public bool isDelivered { get; set; } = false;
 
     }
 }

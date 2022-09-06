@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
+using Shop.Application.Functions.Baskets.Command.UpdateBasket;
+using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
+using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +14,30 @@ namespace Shop.Api.Controllers
 {
     [ApiController]
     [Route("api/Basket")]
-    public class BasketControlles : ControllerBase
+    public class BasketController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public BasketControlles(IMediator mediator)
+        public BasketController(IMediator mediator)
         {
             _mediator = mediator;
         }
-
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<Basket>> GetBasket([FromRoute] int id)
+        {
+            var basket = await _mediator.Send(new GetDetailBasketQuery { Id = id });
+            return Ok(basket);
+        }
         [HttpPost]
         public async Task<ActionResult<int>> CreateBasket([FromBody] CreateBasketCommand command)
         {
             var basketId = await _mediator.Send(command);
             return Ok(basketId);
         }
+
+
+
+
     }
 }

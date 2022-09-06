@@ -1,4 +1,5 @@
-﻿using Shop.Application.Contracts.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using Shop.Application.Contracts.Persistence;
 using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ namespace Shop.Persistence.EF.Repositories
 {
     public class BasketRepository : BaseRepository<Basket>, IBasketRepository
     {
+
+
         public BasketRepository(ShopDbContext dbContext) : base(dbContext)
         {
 
         }
+
+
     }
 }

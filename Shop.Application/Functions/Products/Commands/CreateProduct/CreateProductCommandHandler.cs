@@ -19,6 +19,7 @@ namespace Shop.Application.Functions.Products.Commands.CreateProduct
         public CreateProductCommandHandler(IMapper mapper,IAsyncRepository<Product> repository)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
