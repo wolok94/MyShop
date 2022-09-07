@@ -10,20 +10,21 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Baskets.Query.GetDetailBasket
 {
-    public class GetDetailBasketQueryHandler : IRequestHandler<GetDetailBasketQuery, BasketProduct>
+    public class GetDetailBasketQueryHandler : IRequestHandler<GetDetailBasketQuery, GetDetailBasketView>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<BasketProduct> _basketProductRepository;
+        private readonly IBasketRepository _basketRepository;
 
-        public GetDetailBasketQueryHandler(IMapper mapper, IAsyncRepository<BasketProduct> basketProductRepository)
+        public GetDetailBasketQueryHandler(IMapper mapper, IBasketRepository basketRepository)
         {
             _mapper = mapper;
-            _basketProductRepository = basketProductRepository;
+            _basketRepository = basketRepository;
         }
-        public async Task<BasketProduct> Handle(GetDetailBasketQuery request, CancellationToken cancellationToken)
+        public async Task<GetDetailBasketView> Handle(GetDetailBasketQuery request, CancellationToken cancellationToken)
         {
-            var basket = await _basketProductRepository.GetByIdAsync(request.Id);
-            return basket;
+            var basket = await _basketRepository.GetBasketById(request.Id);
+            var mappedBasket = _mapper.Map<GetDetailBasketView>(basket);
+            return mappedBasket;
         }
     }
 }

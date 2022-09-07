@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
-using Shop.Application.Functions.Baskets.Command.UpdateBasket;
+using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Categories.Commands.UpdateCategory;
 using Shop.Application.Functions.Categories.Queries.GetCategoriesList;
@@ -48,7 +48,10 @@ namespace Shop.Application.Mapper
             CreateMap<LoginCustomerQuery, LoginDto>();
             CreateMap<CreateBasketCommand, Basket>().ReverseMap();
             CreateMap<UpdateOrderCommand, OrderToSend>();
-            CreateMap<UpdateBasketCommand, Basket>();
+            CreateMap<GetDetailBasketView, Basket>().ReverseMap()
+                .ForMember(x => x.NickName, x=> x.MapFrom(x => x.User.NickName));
+            CreateMap<ProductView, Product>().ReverseMap()
+                .ForMember(x => x.CategoryName, x => x.MapFrom(x => x.Category.Name));
 
             
 

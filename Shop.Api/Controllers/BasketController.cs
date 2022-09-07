@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Functions.Baskets.Command.AddProductsToBasket;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
-using Shop.Application.Functions.Baskets.Command.UpdateBasket;
+using Shop.Application.Functions.Baskets.Command.DeleteProductFromBasket;
 using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
+using Shop.Application.Functions.Products.Commands.DeleteProduct;
 using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -37,10 +38,16 @@ namespace Shop.Api.Controllers
             return Ok(basketId);
         }
         [HttpPatch]
-        public async Task<ActionResult<double>> AddProductsTobasket([FromBody] AddProductToBasketCommand command)
+        public async Task<ActionResult<double>> AddProductsToBasket([FromBody] AddProductToBasketCommand command)
         {
             var price = await _mediator.Send(command);
             return Ok(price);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProductFromBasket([FromBody] DeleteProductFromBasketCommand command)
+        {
+            await _mediator.Send(command);
+            return NoContent();
         }
 
 
