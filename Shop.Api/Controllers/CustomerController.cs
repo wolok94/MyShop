@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Functions.Users.Commands.CreateUser;
 using Shop.Application.Functions.Users.Commands.DeleteUser;
@@ -13,8 +14,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Api.Controllers
 {
-    [Route("api/customer")]
+    [Route("api/Customer")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,6 +27,7 @@ namespace Shop.Api.Controllers
         }
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
 
         public async Task<ActionResult<CustomerViewModel>> Login([FromBody] LoginDto customerDto)
         {
@@ -40,6 +43,7 @@ namespace Shop.Api.Controllers
             return Ok(customer);
         }
         [HttpPost(Name = "CreateCustomer")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
             var customerId = await _mediator.Send(createCustomerCommand);

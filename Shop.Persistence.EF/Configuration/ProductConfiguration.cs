@@ -27,6 +27,24 @@ namespace Shop.Persistence.EF.Configuration
 
             builder.Property(x => x.CategoryId)
                 .IsRequired();
+
+            builder.HasMany(x => x.Baskets)
+                .WithMany(x => x.Products)
+                .UsingEntity<BasketProduct>(
+                b => b.HasOne( b => b.Basket)
+                .WithMany()
+                .HasForeignKey(b => b.BasketId),
+
+                 p => p.HasOne(p => p.Product)
+                .WithMany()
+                .HasForeignKey(b => b.ProductId),
+
+                 bp =>
+                 {
+                     bp.HasKey(x => new { x.ProductId, x.BasketId });
+                     bp.Property(x => x.DateOfCreated).HasDefaultValueSql("getutcdate()");
+                 }
+                );
         }
     }
 }

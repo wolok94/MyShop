@@ -5,6 +5,7 @@ using Shop.Application.Mapper;
 using Shop.Persistence.EF;
 using Shop.Persistence.EF.Seed;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -21,10 +22,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 };
 });
+builder.Services.AddControllers().AddJsonOptions(option =>
+    option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddAuthorization();
 builder.Services.InstallShopApplication();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();

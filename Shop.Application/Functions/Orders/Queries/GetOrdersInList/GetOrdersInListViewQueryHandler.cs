@@ -24,6 +24,6 @@ public class GetOrdersInListViewQueryHandler : IRequestHandler<GetOrdersInListVi
     {
         var orders = await _orderRepository.GetAll();
         var orderedOrders = orders.OrderBy(o => o.isDelivered);
-        return (List<OrderToSend>)orderedOrders;
+        return _mapper.Map<List<OrderToSend>>(orderedOrders);
     }
 }

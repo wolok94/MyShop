@@ -15,8 +15,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Category")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -28,19 +29,20 @@ namespace Shop.Api.Controllers
 
 
         [HttpGet(Name = "GetAllCategories")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CustomerViewModel>>> GetCategories()
         {
             var categories = await _mediator.Send(new GetCategoryInListQuery());
             return Ok(categories);
         }
         [HttpGet("{id}",Name = "GetCategory")]
-
+        [AllowAnonymous]
         public async Task<ActionResult<CustomerViewModel>> GetCategory(int id)
         {
             var category = await _mediator.Send(new GetCategoryDetailsQuery() { Id = id });
             return Ok(category);
         }
-        [Authorize(Roles = "Admin")]
+        
         [HttpPost(Name = "CreateCategory")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
@@ -55,6 +57,7 @@ namespace Shop.Api.Controllers
             return NoContent();
         }
         [HttpPatch(Name = "UpdateCategory")]
+        [AllowAnonymous]
         public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
             await _mediator.Send(updateCategoryCommand);

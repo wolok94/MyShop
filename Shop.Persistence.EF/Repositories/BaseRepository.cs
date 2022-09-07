@@ -37,7 +37,7 @@ namespace Shop.Persistence.EF.Repositories
             return items;
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             var item = await _dbContext.Set<T>().FindAsync(id);
             return item;
@@ -45,8 +45,11 @@ namespace Shop.Persistence.EF.Repositories
 
         public async Task UpdateAsync(T entity)
         {
+
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
+
+
     }
 }

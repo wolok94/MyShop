@@ -10,6 +10,8 @@ namespace Shop.Domain.Entities
     {
         public int Id { get; set; }
         public List<Product> Products { get; set; } = new List<Product>();
+        public User User { get; set; }
+        public int UserId { get; set; }
 
     }
 }

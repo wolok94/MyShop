@@ -9,6 +9,8 @@ namespace Shop.Application.Contracts.Persistence
 {
     public interface IBasketRepository : IAsyncRepository<Basket>
     {
-
+        Task<double> AddProductToBasket(int id, Product product, int quantity);
+        Task DeleteProductFromBasket(int basketId, Product product);
+        Task<Basket> GetBasketById(int basketId);
     }
 }

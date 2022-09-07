@@ -14,6 +14,6 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
         public string NickName { get; set; }
         public string Password { get; set; }
         public Address Address { get; set; }
-        public int ? RoleId { get; set; }
+        public int RoleId { get; set; } = 1;
     }
 }

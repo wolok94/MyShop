@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Shop.Application.Functions.Baskets.Command.CreateBasket;
+using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Categories.Commands.UpdateCategory;
 using Shop.Application.Functions.Categories.Queries.GetCategoriesList;
@@ -7,6 +9,7 @@ using Shop.Application.Functions.Comments.Command.CreateComment;
 using Shop.Application.Functions.Comments.Command.UpdateComment;
 using Shop.Application.Functions.Comments.Queries.GetInList;
 using Shop.Application.Functions.Orders.Command.CreateOrder;
+using Shop.Application.Functions.Orders.UpdateOrder;
 using Shop.Application.Functions.Products.Commands.CreateProduct;
 using Shop.Application.Functions.Products.Commands.UpdateProduct;
 using Shop.Application.Functions.Products.Queries.GetProductDetail;
@@ -41,8 +44,16 @@ namespace Shop.Application.Mapper
             CreateMap<CreateCustomerCommand, Customer>();
             CreateMap<UpdateCommentCommand, Comment>();
             CreateMap<CreateCommentCommand, Comment>().ReverseMap();
-            CreateMap<OrderToSend, CreateOrderCommand>().ReverseMap();
+            CreateMap<OrderToSend,CreateOrderCommand>().ForMember(x => x.Shipment, x=> x.MapFrom(x => (int)x.Shipment)).ReverseMap();
             CreateMap<LoginCustomerQuery, LoginDto>();
+            CreateMap<CreateBasketCommand, Basket>().ReverseMap();
+            CreateMap<UpdateOrderCommand, OrderToSend>();
+            CreateMap<GetDetailBasketView, Basket>().ReverseMap()
+                .ForMember(x => x.NickName, x=> x.MapFrom(x => x.User.NickName));
+            CreateMap<ProductView, Product>().ReverseMap()
+                .ForMember(x => x.CategoryName, x => x.MapFrom(x => x.Category.Name));
+
+            
 
         }
     }

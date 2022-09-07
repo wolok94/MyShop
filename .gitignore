@@ -82,3 +82,10 @@ Shop.Api/obj/Debug/net6.0/Shop.Api.GlobalUsings.g.cs
 Shop.Persistence.EF/Migrations/20220830161405_Init.cs
 Shop.Persistence.EF/Migrations/20220830161405_Init.Designer.cs
 Shop.Persistence.EF/Migrations/ShopDbContextModelSnapshot.cs
+Shop.Persistence.EF/Migrations/20220905080153_Added relation many to many for product and basket.cs
+Shop.Persistence.EF/Migrations/20220905080153_Added relation many to many for product and basket.Designer.cs
+Shop.Persistence.EF/Migrations/20220905134832_Delete id in BasketProduct.cs
+Shop.Persistence.EF/Migrations/20220905134832_Delete id in BasketProduct.Designer.cs
+Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated property in BasketProduct.cs
+Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated property in BasketProduct.Designer.cs
+.vs/Shop/v17/Browse.VC.db
