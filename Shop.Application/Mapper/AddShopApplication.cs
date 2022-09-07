@@ -15,6 +15,7 @@ namespace Shop.Application.Mapper
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped<IUserContext, UserContext>();
 
             return services;
         }

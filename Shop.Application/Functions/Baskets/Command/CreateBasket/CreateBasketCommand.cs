@@ -10,7 +10,6 @@ namespace Shop.Application.Functions.Baskets.Command.CreateBasket
 {
     public class CreateBasketCommand : IRequest<int>
     {
-        public List<Product> Products { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }

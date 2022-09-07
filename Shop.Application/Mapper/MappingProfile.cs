@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Shop.Application.Functions.BasketProducts.Command.Create;
-using Shop.Application.Functions.BasketProducts.Command.Update;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
 using Shop.Application.Functions.Baskets.Command.UpdateBasket;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
@@ -51,8 +49,7 @@ namespace Shop.Application.Mapper
             CreateMap<CreateBasketCommand, Basket>().ReverseMap();
             CreateMap<UpdateOrderCommand, OrderToSend>();
             CreateMap<UpdateBasketCommand, Basket>();
-            CreateMap<CreateBasketProductCommand, BasketProduct>();
-            CreateMap<DeleteBasketProductsCommand, BasketProduct>();
+
             
 
         }

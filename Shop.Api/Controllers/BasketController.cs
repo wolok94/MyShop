@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.Functions.Baskets.Command.AddProductsToBasket;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
 using Shop.Application.Functions.Baskets.Command.UpdateBasket;
 using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
@@ -34,6 +35,12 @@ namespace Shop.Api.Controllers
         {
             var basketId = await _mediator.Send(command);
             return Ok(basketId);
+        }
+        [HttpPatch]
+        public async Task<ActionResult<double>> AddProductsTobasket([FromBody] AddProductToBasketCommand command)
+        {
+            var price = await _mediator.Send(command);
+            return Ok(price);
         }
 
 

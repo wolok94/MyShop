@@ -25,6 +25,7 @@ builder.Services.AddAuthorization();
 builder.Services.InstallShopApplication();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
