@@ -28,12 +28,12 @@ namespace Shop.Persistence.EF.Configuration
             builder.Property(x => x.CategoryId)
                 .IsRequired();
 
-            builder.HasMany(x => x.Baskets)
+            builder.HasMany(x => x.ShoppingCarts)
                 .WithMany(x => x.Products)
-                .UsingEntity<BasketProduct>(
-                b => b.HasOne( b => b.Basket)
+                .UsingEntity<ProductCart>(
+                b => b.HasOne( b => b.ShoppingCart)
                 .WithMany()
-                .HasForeignKey(b => b.BasketId),
+                .HasForeignKey(b => b.ShoppingCartId),
 
                  p => p.HasOne(p => p.Product)
                 .WithMany()
@@ -41,7 +41,7 @@ namespace Shop.Persistence.EF.Configuration
 
                  bp =>
                  {
-                     bp.HasKey(x => new { x.ProductId, x.BasketId });
+                     bp.HasKey(x => new { x.ProductId, x.ShoppingCartId});
                      bp.Property(x => x.DateOfCreated).HasDefaultValueSql("getutcdate()");
                  }
                 );

@@ -30,14 +30,14 @@ namespace Shop.Api.Controllers
 
         [HttpGet(Name = "GetAllCategories")]
         [AllowAnonymous]
-        public async Task<ActionResult<List<CustomerViewModel>>> GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
             var categories = await _mediator.Send(new GetCategoryInListQuery());
             return Ok(categories);
         }
         [HttpGet("{id}",Name = "GetCategory")]
         [AllowAnonymous]
-        public async Task<ActionResult<CustomerViewModel>> GetCategory(int id)
+        public async Task<IActionResult> GetCategory(int id)
         {
             var category = await _mediator.Send(new GetCategoryDetailsQuery() { Id = id });
             return Ok(category);

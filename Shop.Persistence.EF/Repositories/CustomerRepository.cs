@@ -51,9 +51,11 @@ namespace Shop.Persistence.EF.Repositories
             var customer = await _dbContext.Users.Include(x => x.Role)
                 .FirstOrDefaultAsync(x => x.NickName == dto.NickName 
                 && result == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Success);
+
+            var shoppingCart = await _dbContext.ShoppingCarts.AsNoTracking().FirstOrDefaultAsync(x => x.CustomerId == customer.Id);
             if (customer != null)
             {
-                generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), customer);
+                generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), customer, shoppingCart);
 
             }
             return generatedToken;

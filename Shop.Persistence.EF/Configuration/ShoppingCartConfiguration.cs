@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Persistence.EF.Configuration
 {
-    public class RoleRepository : IEntityTypeConfiguration<Role>
+    public class ShoppingCartConfiguration : IEntityTypeConfiguration<ShoppingCart>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<ShoppingCart> builder)
         {
-            builder.HasMany(x => x.Users).WithOne(x => x.Role).HasForeignKey(x => x.RoleId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Customer).WithOne(x => x.ShoppingCart).HasForeignKey<ShoppingCart>(x => x.CustomerId);
         }
     }
 }

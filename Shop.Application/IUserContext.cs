@@ -10,7 +10,7 @@ namespace Shop.Application
     public interface IUserContext
     {
         int? GetUserId { get; }
-        int? GetBasketId { get; }
+        int? GetShoppingCartId { get; }
         ClaimsPrincipal User { get; }
     }
 }

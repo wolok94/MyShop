@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain.Entities
 {
-    public class Basket
+    public class ShoppingCart
     {
         public int Id { get; set; }
-        public List<Product> Products { get; set; } = new List<Product>();
-        public User User { get; set; }
-        public int UserId { get; set; }
-
+        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

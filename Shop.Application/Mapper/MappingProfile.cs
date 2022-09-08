@@ -46,10 +46,10 @@ namespace Shop.Application.Mapper
             CreateMap<CreateCommentCommand, Comment>().ReverseMap();
             CreateMap<OrderToSend,CreateOrderCommand>().ForMember(x => x.Shipment, x=> x.MapFrom(x => (int)x.Shipment)).ReverseMap();
             CreateMap<LoginCustomerQuery, LoginDto>();
-            CreateMap<CreateBasketCommand, Basket>().ReverseMap();
+            CreateMap<CreateCartCommand, ShoppingCart>().ReverseMap();
             CreateMap<UpdateOrderCommand, OrderToSend>();
-            CreateMap<GetDetailBasketView, Basket>().ReverseMap()
-                .ForMember(x => x.NickName, x=> x.MapFrom(x => x.User.NickName));
+            CreateMap<GetDetailCartView, ShoppingCart>().ReverseMap()
+                .ForMember(x => x.NickName, x=> x.MapFrom(x => x.Customer.NickName));
             CreateMap<ProductView, Product>().ReverseMap()
                 .ForMember(x => x.CategoryName, x => x.MapFrom(x => x.Category.Name));
 

@@ -30,7 +30,7 @@ namespace Shop.Api.Controllers
 
         [HttpGet(Name = "GetAllproducts")]
         [AllowAnonymous]
-        public async Task<ActionResult<List<CustomerViewModel>>> Getproducts()
+        public async Task<IActionResult> GetProducts()
         {
             var products = await _mediator.Send(new GetProductsListQuery());
             return Ok(products);
@@ -38,7 +38,7 @@ namespace Shop.Api.Controllers
         [HttpGet("{id}", Name = "GetProduct")]
         [AllowAnonymous]
 
-        public async Task<ActionResult<CustomerViewModel>> GetProduct(int id)
+        public async Task<IActionResult> GetProduct(int id)
         {
             var Product = await _mediator.Send(new GetProductDetailQuery() { Id = id });
             return Ok(Product);

@@ -17,8 +17,7 @@ namespace Shop.Domain.Entities
         public List<Comment> Comments { get; set; }
         public Role Role { get; set; }
         public int RoleId { get; set; }
-        public Basket Basket { get; set; } = new Basket();
-        public int BasketId { get; set; }
+
 
     }
 }

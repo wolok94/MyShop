@@ -13,14 +13,14 @@ namespace Shop.Persistence.EF.JwtToken
     public class TokenService : ITokenService
     {
         private const double EXPIRY_DURATION_MINUTES = 30;
-        public string BuildToken(string key, string issuer, User user)
+        public string BuildToken(string key, string issuer, User user, ShoppingCart shoppingCart)
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.NickName),
                 new Claim(ClaimTypes.Role, user.Role.Name),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim("BasketId", user.BasketId.ToString())
+                new Claim("BasketId", shoppingCart.Id.ToString())
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));

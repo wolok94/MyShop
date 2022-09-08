@@ -10,8 +10,9 @@ namespace Shop.Domain.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Basket Basket { get; set; }
-        public OrderToSend Order { get; set; }
+        public List<OrderToSend> Orders { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
+
 
     }
 }

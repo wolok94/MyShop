@@ -21,7 +21,7 @@ namespace Shop.Persistence.EF
         public DbSet<OrderToSend> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Basket> BasketCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

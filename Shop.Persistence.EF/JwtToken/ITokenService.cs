@@ -9,7 +9,7 @@ namespace Shop.Persistence.EF.JwtToken
 {
     public interface ITokenService
     {
-        string BuildToken(string key, string issuer, User user);
+        string BuildToken(string key, string issuer, User user, ShoppingCart shoppingCart);
         bool ValidateToken(string key, string issuer, string audience, string token);
     }
 }

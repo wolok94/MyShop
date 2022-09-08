@@ -16,7 +16,7 @@ namespace Shop.Api.Controllers
 {
     [Route("api/Customer")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, User")]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -29,7 +29,7 @@ namespace Shop.Api.Controllers
         [Route("login")]
         [AllowAnonymous]
 
-        public async Task<ActionResult<CustomerViewModel>> Login([FromBody] LoginDto customerDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto customerDto)
         {
             var customer = await _mediator.Send(new LoginCustomerQuery() { NickName = customerDto.NickName, Password = customerDto.Password });
             return Ok(customer);
@@ -37,7 +37,7 @@ namespace Shop.Api.Controllers
 
         [HttpGet("{id}", Name = "GetCustomer")]
 
-        public async Task<ActionResult<CustomerViewModel>> GetCustomer(int id)
+        public async Task<IActionResult> GetCustomer(int id)
         {
             var customer = await _mediator.Send(new GetCustomerDetailQuery() { Id = id });
             return Ok(customer);
