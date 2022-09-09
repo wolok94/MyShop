@@ -10,7 +10,8 @@ namespace Shop.Application.Functions.Baskets.Command.AddProductsToBasket
 {
     public class AddProductToCartCommand : IRequest<double>
     {
-        public int ShoppingCartId { get; set; }
+
+
         public Product Product { get; set; }
         public int Quantity { get; set; }
     }

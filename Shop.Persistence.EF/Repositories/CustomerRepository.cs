@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using MediatR;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Shop.Application.Contracts.Persistence;
+using Shop.Application.Functions.Baskets.Command.CreateBasket;
 using Shop.Application.Functions.Exceptions;
 using Shop.Application.Functions.Users.Commands.CreateUser;
 using Shop.Application.Functions.Users.Queries.Login;
@@ -25,14 +27,16 @@ namespace Shop.Persistence.EF.Repositories
         private IPasswordHasher<Customer> _passwordHasher;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
         private string generatedToken;
 
-        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher, ITokenService tokenService, IConfiguration configuration) : base(dbContext)
+        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher, ITokenService tokenService, IConfiguration configuration, IMediator mediator) : base(dbContext)
         {
             _dbContext = dbContext;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _configuration = configuration;
+            _mediator = mediator;
         }
 
         public async Task<string> Login( LoginDto dto)
@@ -53,6 +57,10 @@ namespace Shop.Persistence.EF.Repositories
                 && result == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Success);
 
             var shoppingCart = await _dbContext.ShoppingCarts.AsNoTracking().FirstOrDefaultAsync(x => x.CustomerId == customer.Id);
+            if (shoppingCart == null)
+            {
+                shoppingCart = await _mediator.Send(new CreateCartCommand { CustomerId = customer.Id });
+            }
             if (customer != null)
             {
                 generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), customer, shoppingCart);

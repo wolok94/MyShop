@@ -57,7 +57,6 @@ namespace Shop.Api.Controllers
             return NoContent();
         }
         [HttpPatch(Name = "UpdateCategory")]
-        [AllowAnonymous]
         public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
             await _mediator.Send(updateCategoryCommand);

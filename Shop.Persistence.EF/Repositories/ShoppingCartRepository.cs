@@ -18,11 +18,11 @@ namespace Shop.Persistence.EF.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<double> AddProductToShoppingCart(int id, Product product, int quantity)
+        public async Task<double> AddProductToShoppingCart(int? id, Product product, int quantity)
         {
             var shoppingCart = await GetShoppingCart(id);
 
-            var productToUpdate = await _dbContext.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == product.Id);
+            var productToUpdate = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
             shoppingCart.Products.Add(productToUpdate);
             productToUpdate.InStock -= quantity;
             await _dbContext.SaveChangesAsync();
@@ -49,7 +49,7 @@ namespace Shop.Persistence.EF.Repositories
                 .FirstOrDefaultAsync(x => x.Id == shoppingCartId);
             return shoppingCart;
         }
-        private async Task<ShoppingCart> GetShoppingCart(int id)
+        private async Task<ShoppingCart> GetShoppingCart(int? id)
         {
             var shoppingCart = await _dbContext.ShoppingCarts
             .Include(x => x.Products)

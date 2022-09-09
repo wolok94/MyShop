@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Baskets.Command.CreateBasket
 {
-    public class CreateCartCommandHandler : IRequestHandler<CreateCartCommand, int>
+    public class CreateCartCommandHandler : IRequestHandler<CreateCartCommand, ShoppingCart>
     {
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<ShoppingCart> _shoppingCartRepository;
@@ -20,11 +20,11 @@ namespace Shop.Application.Functions.Baskets.Command.CreateBasket
             _mapper = mapper;
             _shoppingCartRepository = shoppingCartRepository;
         }
-        public async Task<int> Handle(CreateCartCommand request, CancellationToken cancellationToken)
+        public async Task<ShoppingCart> Handle(CreateCartCommand request, CancellationToken cancellationToken)
         {
             var basket = _mapper.Map<ShoppingCart>(request);
             await _shoppingCartRepository.AddAsync(basket);
-            return basket.Id;
+            return basket;
         }
     }
 }
