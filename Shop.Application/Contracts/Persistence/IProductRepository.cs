@@ -9,6 +9,6 @@ namespace Shop.Application.Contracts.Persistence
 {
     public interface IProductRepository : IAsyncRepository<Product>
     {
-
+        Task<Product> GetProductDetailById(int id);
     }
 }

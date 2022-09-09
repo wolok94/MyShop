@@ -11,5 +11,6 @@ namespace Shop.Application.Contracts.Persistence
     public interface ICustomerRepository : IAsyncRepository<Customer>
     {
         Task<string> Login(LoginDto dto);
+        Task<Customer> RegisterUser(User user, string password);
     }
 }

@@ -18,13 +18,13 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IPasswordHasher<Customer> _passwordHasher;
 
-        public CreateCustomerCommandHandler(IMapper mapper, IAsyncRepository<Customer> orderRepository, IPasswordHasher<Customer> passwordHasher)
+        public CreateCustomerCommandHandler(IMapper mapper, ICustomerRepository customerRepository, IPasswordHasher<Customer> passwordHasher)
         {
             _mapper = mapper;
-            _customerRepository = orderRepository;
+            _customerRepository = customerRepository;
             _passwordHasher = passwordHasher;
         }
         public async Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -38,7 +38,7 @@ namespace Shop.Application.Functions.Users.Commands.CreateUser
             }
             var customer = _mapper.Map<Customer>(request);
             customer.hashedPassword = GetHashedPassword(customer, request.Password);
-            customer = await _customerRepository.AddAsync(customer);
+            customer = await _customerRepository.RegisterUser(customer, request.Password);
             return customer.Id;
         }
         public string GetHashedPassword(Customer user, string password)

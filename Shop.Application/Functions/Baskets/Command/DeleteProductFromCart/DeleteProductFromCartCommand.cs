@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Baskets.Command.DeleteProductFromBasket
 {
-    public class DeleteProductFromBasketCommand : IRequest
+    public class DeleteProductFromCartCommand : IRequest
     {
-        public int BasketId { get; set; }
+        public int ShoppingCartId { get; set; }
         public Product Product { get; set; }
     }
 }

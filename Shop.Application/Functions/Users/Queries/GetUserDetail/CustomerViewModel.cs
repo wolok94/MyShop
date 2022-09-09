@@ -12,7 +12,7 @@ namespace Shop.Application.Functions.Users.Queries.GetUserDetail
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Basket Basket { get; set; }
+        public ShoppingCart Basket { get; set; }
         public Address Address { get; set; }
         public string Email { get; set; }
     }

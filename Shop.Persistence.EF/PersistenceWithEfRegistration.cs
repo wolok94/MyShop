@@ -8,6 +8,7 @@ using Shop.Domain.Entities;
 using Shop.Persistence.EF.JwtToken;
 using Shop.Persistence.EF.Repositories;
 using Shop.Persistence.EF.Seed;
+using Shop.Persistence.EF.SendingEmail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +29,11 @@ namespace Shop.Persistence.EF
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
             services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<RoleSeeder>();
+            services.AddScoped<IEmail, Email>();
             return services;
         }
     }

@@ -32,7 +32,7 @@ namespace Shop.Persistence.EF.Configuration
             builder.HasOne(x => x.Role).WithMany(x => x.Users)
                 .HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.Basket).WithOne(x => x.User).HasForeignKey<Basket>(x => x.UserId);
+            
 
 
 

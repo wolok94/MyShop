@@ -18,7 +18,7 @@ namespace Shop.Application
         }
         public int? GetUserId => User == null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
-        public int? GetBasketId => User == null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == "BasketId").Value);
+        public int? GetShoppingCartId => User == null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == "BasketId").Value);
 
         public ClaimsPrincipal User => httpContextAccessor.HttpContext.User;
     }

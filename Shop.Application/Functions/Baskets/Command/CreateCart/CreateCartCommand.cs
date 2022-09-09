@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Baskets.Command.CreateBasket
 {
-    public class CreateBasketCommand : IRequest<int>
+    public class CreateCartCommand : IRequest<ShoppingCart>
     {
-        public int? UserId { get; set; }
+        public int? CustomerId { get; set; }
     }
 }

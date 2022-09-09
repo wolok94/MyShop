@@ -34,14 +34,14 @@ namespace Shop.Api.Controllers
             return Ok(order);
         }
         [HttpGet]
-        public async Task<ActionResult<List<OrderToSend>>> GetOrders()
+        public async Task<IActionResult> GetOrders()
         {
             var orders = await _mediator.Send(new GetOrdersInListViewQuery(), CancellationToken.None);
             return Ok(orders);
         }
         [HttpGet]
         [Route("{id}")]
-        public async Task <ActionResult<OrderToSend>> GetOrder([FromRoute] int id)
+        public async Task <IActionResult> GetOrder([FromRoute] int id)
         {
             var order = await _mediator.Send(new GetOrderDetailQuery { Id = id });
             return Ok(order);
