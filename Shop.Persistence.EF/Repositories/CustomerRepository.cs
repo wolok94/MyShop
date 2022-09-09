@@ -11,6 +11,7 @@ using Shop.Application.Functions.Users.Commands.CreateUser;
 using Shop.Application.Functions.Users.Queries.Login;
 using Shop.Domain.Entities;
 using Shop.Persistence.EF.JwtToken;
+using Shop.Persistence.EF.SendingEmail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,15 +29,17 @@ namespace Shop.Persistence.EF.Repositories
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
+        private readonly IEmail _email;
         private string generatedToken;
 
-        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher, ITokenService tokenService, IConfiguration configuration, IMediator mediator) : base(dbContext)
+        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher, ITokenService tokenService, IConfiguration configuration, IMediator mediator, IEmail email) : base(dbContext)
         {
             _dbContext = dbContext;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _configuration = configuration;
             _mediator = mediator;
+            _email = email;
         }
 
         public async Task<string> Login( LoginDto dto)
@@ -67,6 +70,14 @@ namespace Shop.Persistence.EF.Repositories
 
             }
             return generatedToken;
+        }
+        public async Task<Customer> RegisterUser(User user, string password)
+        {
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+            var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileWriter.WriteFile(password, user.NickName));
+            await _email.SendEmail(messageParams);
+            return (Customer)user;
         }
     }
 }
