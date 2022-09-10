@@ -14,6 +14,6 @@ namespace Shop.Domain.Entities
         public Shipment Shipment { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 }

@@ -13,6 +13,28 @@ namespace Shop.Persistence.EF.Configuration
     {
         public void Configure(EntityTypeBuilder<CompletedOrder> builder)
         {
+            builder.HasMany(x => x.Products)
+                .WithMany(x => x.CompletedOrders)
+                .UsingEntity<OrderProduct>(
+                    o => o.HasOne(p => p.Product)
+                    .WithMany()
+                    .HasForeignKey(p => p.ProductId),
+
+                    o => o.HasOne(o => o.Order)
+                          .WithMany()
+                          .HasForeignKey(o => o.OrderId),
+
+                    op =>
+                    {
+                        op.HasKey(x => new { x.OrderId, x.ProductId });
+                    }
+                    );
+
+            builder.HasOne(u => u.User)
+                .WithMany()
+                .HasForeignKey(u => u.UserId);
+
+
 
         }
     }

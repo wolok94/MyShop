@@ -28,6 +28,8 @@ namespace Shop.Persistence.EF.Configuration
                 .IsRequired();
 
             builder.HasOne(b => b.Basket);
+
+
                 
                 
                 

@@ -45,6 +45,7 @@ namespace Shop.Persistence.EF.Configuration
                      bp.Property(x => x.DateOfCreated).HasDefaultValueSql("getutcdate()");
                  }
                 );
+
         }
     }
 }
