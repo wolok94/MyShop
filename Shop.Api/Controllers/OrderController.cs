@@ -27,7 +27,6 @@ namespace Shop.Api.Controllers
             _mediator = mediator;
         }
         [HttpPost]
-        [AllowAnonymous]
         public async Task <IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
             var order = await _mediator.Send(command, CancellationToken.None);

@@ -11,14 +11,7 @@ namespace Shop.Application.Functions.Orders.Command.CreateOrder
     {
         public CreateOrderValidator()
         {
-            RuleFor(o => o.BasketId)
-                .NotEmpty()
-                .WithMessage("{PropertyName} is required");
 
-            RuleFor(o => o.UserId)
-                .NotEmpty()
-                .WithMessage("{PropertyName} is required")
-                .GreaterThan(0);
 
             RuleFor(o => o.Shipment)
                 .NotEmpty()

@@ -75,7 +75,7 @@ namespace Shop.Persistence.EF.Repositories
         {
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
-            var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileWriter.WriteFile(password, user.NickName));
+            var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileReader.ReadRegistrationFile(password, user.NickName));
             await _email.SendEmail(messageParams);
             return (Customer)user;
         }

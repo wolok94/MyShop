@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shop.Application.Mapper;
 using Shop.Persistence.EF;
 using Shop.Persistence.EF.Seed;
+using Shop.Persistence.EF.SendingEmail;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -29,6 +31,7 @@ builder.Services.InstallShopApplication();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<EmailAppSettingsConfig>(builder.Configuration.GetSection("EmailCredentials"));
 
 
 var app = builder.Build();
