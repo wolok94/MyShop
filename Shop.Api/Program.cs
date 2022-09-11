@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Shop.Api.Middleware;
 using Shop.Application;
 using Shop.Persistence.EF;
 using Shop.Persistence.EF.Seed;
@@ -39,6 +40,7 @@ var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<RoleSeeder>();
 await seeder.SeedRoles();
 app.UseAuthentication();
+app.UseMiddleware<ExceptionCatcherMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
 
