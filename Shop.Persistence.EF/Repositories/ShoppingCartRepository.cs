@@ -42,7 +42,6 @@ namespace Shop.Persistence.EF.Repositories
         public async Task<ShoppingCart> GetShoppingCartById(int shoppingCartId)
         {
             var shoppingCart = await _dbContext.ShoppingCarts
-                .AsNoTracking()
                 .Include(x => x.Products)
                 .ThenInclude(p => p.Category)
                 .Include(u => u.Customer)
@@ -55,6 +54,13 @@ namespace Shop.Persistence.EF.Repositories
             .Include(x => x.Products)
             .FirstOrDefaultAsync(x => x.Id == id);
             return shoppingCart;
+        }
+        public async Task DeleteProductsFromShoppingCart(int shoppingCartId)
+        {
+            var shoppingCart = await GetShoppingCart(shoppingCartId);
+            shoppingCart.Products.Clear();
+            await _dbContext.SaveChangesAsync();
+
         }
 
 

@@ -18,16 +18,15 @@ namespace Shop.Persistence.EF.Configuration
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Property(x => x.BasketId)
-                .IsRequired();
-
             builder.Property(x => x.UserId)
                 .IsRequired();
 
             builder.Property(x => x.Shipment)
                 .IsRequired();
 
-            builder.HasOne(b => b.Basket);
+
+
+
                 
                 
                 

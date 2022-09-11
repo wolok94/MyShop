@@ -10,13 +10,13 @@ namespace Shop.Domain.Entities
     public class OrderToSend
     {
         public int Id { get; set; }
-        public ShoppingCart Basket { get; set; }
-        public int BasketId { get; set; }
+        public List<Product> Products { get; set; }
         public Customer User { get; set; }
         public int UserId { get; set; }
         public Shipment Shipment { get; set; }
-        public DateTime dateOfOrder { get; set; }
+        public DateTime dateOfOrder { get; set; } = DateTime.Now;
         public bool isDelivered { get; set; } = false;
+        public double Price { get; set; }
 
     }
 }

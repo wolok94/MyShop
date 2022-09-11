@@ -34,6 +34,7 @@ namespace Shop.Api.Controllers
             return Ok(basket);
         }
         [HttpPost]
+
         public async Task<IActionResult> CreateShoppingCart([FromBody] CreateCartCommand command)
         {
             var shoppingCartId = await _mediator.Send(command);

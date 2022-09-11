@@ -6,11 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Extensions.Options;
 
 namespace Shop.Persistence.EF.SendingEmail
 {
     public class Email : IEmail
     {
+        private readonly IOptions<EmailAppSettingsConfig> _config;
+
+        public Email(IOptions<EmailAppSettingsConfig> config)
+        {
+            _config = config;
+        }
         public async Task SendEmail(MessageParams messageParams)
         {
             SmtpClient smtpClient = new SmtpClient()
@@ -22,8 +29,8 @@ namespace Shop.Persistence.EF.SendingEmail
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential()
                 {
-                    UserName = "MyShopKamil94@gmail.com",
-                    Password = "krrbqzlevnyiicpj"
+                    UserName = _config.Value.UserName,
+                    Password = _config.Value.Password
                 }
             };
             MailAddress FromEmail = new MailAddress("MyShopKamil94@gmail.com", "MyShop");

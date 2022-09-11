@@ -45,6 +45,24 @@ namespace Shop.Persistence.EF.Configuration
                      bp.Property(x => x.DateOfCreated).HasDefaultValueSql("getutcdate()");
                  }
                 );
+
+            builder.HasMany(o => o.Orders)
+                .WithMany(p => p.Products)
+                .UsingEntity<OrderProduct>(o =>
+                    o.HasOne(o => o.Order)
+                    .WithMany()
+                    .HasForeignKey(o => o.OrderId),
+
+                    p => p.HasOne(p => p.Product)
+                    .WithMany()
+                    .HasForeignKey(p => p.ProductId),
+
+                    op =>
+                    {
+                        op.HasKey(x => new { x.ProductId, x.OrderId });
+                    }
+                    );
+
         }
     }
 }

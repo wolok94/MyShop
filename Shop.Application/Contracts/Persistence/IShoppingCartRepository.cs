@@ -11,6 +11,7 @@ namespace Shop.Application.Contracts.Persistence
     {
         Task<double> AddProductToShoppingCart(int? id, Product product, int quantity);
         Task DeleteProductFromShoppingCart(int basketId, Product product);
+        Task DeleteProductsFromShoppingCart(int shoppingCartId);
         Task<ShoppingCart> GetShoppingCartById(int basketId);
     }
 }

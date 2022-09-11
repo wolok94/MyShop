@@ -53,6 +53,7 @@ namespace Shop.Application.Mapper
             CreateMap<ProductView, Product>().ReverseMap()
                 .ForMember(x => x.CategoryName, x => x.MapFrom(x => x.Category.Name));
 
+
             
 
         }

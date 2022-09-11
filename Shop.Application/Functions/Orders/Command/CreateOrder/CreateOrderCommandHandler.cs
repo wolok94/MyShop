@@ -17,11 +17,14 @@ namespace Shop.Application.Functions.Orders.Command.CreateOrder
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<OrderToSend> _orderRepository;
-        public CreateOrderCommandHandler(IMapper mapper, IAsyncRepository<OrderToSend> orderRepository)
+        private readonly IOrderRepository _orderRepository;
+        private readonly IUserContext _userContext;
+
+        public CreateOrderCommandHandler(IMapper mapper, IOrderRepository orderRepository, IUserContext userContext)
         {
             _mapper = mapper;
             _orderRepository = orderRepository;
+            _userContext = userContext;
         }
         public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
@@ -32,8 +35,10 @@ namespace Shop.Application.Functions.Orders.Command.CreateOrder
             {
                 throw new ValidationShopException(validatorResult);
             }
+            var shoppingCartId = (int)_userContext.GetShoppingCartId;
+            request.UserId = (int)_userContext.GetUserId;
             var order = _mapper.Map<OrderToSend>(request);
-            order = await _orderRepository.AddAsync(order);
+            order = await _orderRepository.CreateOrder(order, shoppingCartId);
             return order.Id;
         }
     }
