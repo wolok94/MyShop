@@ -25,7 +25,7 @@ namespace Shop.Api.Controllers
         {
             _mediator = mediator;
         }
-        [HttpPost]
+        [HttpGet]
         [Route("login")]
         [AllowAnonymous]
 

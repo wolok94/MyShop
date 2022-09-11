@@ -27,6 +27,7 @@ namespace Shop.Api.Controllers
             _mediator = mediator;
         }
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public async Task <IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
             var order = await _mediator.Send(command, CancellationToken.None);
@@ -40,6 +41,7 @@ namespace Shop.Api.Controllers
         }
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task <IActionResult> GetOrder([FromRoute] int id)
         {
             var order = await _mediator.Send(new GetOrderDetailQuery { Id = id });
@@ -52,7 +54,7 @@ namespace Shop.Api.Controllers
             await _mediator.Send(new DeleteOrderCommand { Id = id });
             return NoContent();
         }
-        [HttpPut]
+        [HttpPatch]
         public async Task <IActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
         {
             await _mediator.Send(command);
