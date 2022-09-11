@@ -23,18 +23,22 @@ namespace Shop.Api.Middleware
                 await next.Invoke(context);
             }catch(AuthenticateException e)
             {
+                _logger.LogError(e, e.Message);
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync(e.Message);
             }catch (EmailExistException e)
             {
+                _logger.LogError(e, e.Message);
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(e.Message);
             }catch (NotFoundException e)
             {
+                _logger.LogError(e, e.Message);
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(e.Message);
             }catch (ValidationShopException e)
             {
+                _logger.LogError(e, e.Message);
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(e.Message);
             }

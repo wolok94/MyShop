@@ -89,3 +89,4 @@ Shop.Persistence.EF/Migrations/20220905134832_Delete id in BasketProduct.Designe
 Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated property in BasketProduct.cs
 Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated property in BasketProduct.Designer.cs
 .vs/Shop/v17/Browse.VC.db
+*.log

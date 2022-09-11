@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using NLog.Web;
 using Shop.Api.Middleware;
 using Shop.Application;
 using Shop.Persistence.EF;
@@ -11,6 +12,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -33,6 +37,7 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<EmailAppSettingsConfig>(builder.Configuration.GetSection("EmailCredentials"));
+builder.Services.AddScoped<ExceptionCatcherMiddleware>();
 
 
 var app = builder.Build();
