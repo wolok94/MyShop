@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Shop.Application.Contracts.Persistence;
+using Shop.Application.Exceptions;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
 using Shop.Application.Functions.Exceptions;
 using Shop.Application.Functions.Users.Commands.CreateUser;
@@ -73,11 +74,23 @@ namespace Shop.Persistence.EF.Repositories
         }
         public async Task<Customer> RegisterUser(User user, string password)
         {
+            if (await IsEmailExist(user))
+            {
+                throw new EmailExistException("Account with this email exist");
+            }
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileReader.ReadRegistrationFile(password, user.NickName));
             await _email.SendEmail(messageParams);
             return (Customer)user;
+        }
+        private async Task<bool> IsEmailExist(User user)
+        {
+            if (await _dbContext.Users.AnyAsync(x => x.Email == user.Email))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
