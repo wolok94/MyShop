@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Shop.Application.Mapper;
+using Shop.Application;
 using Shop.Persistence.EF;
 using Shop.Persistence.EF.Seed;
 using Shop.Persistence.EF.SendingEmail;

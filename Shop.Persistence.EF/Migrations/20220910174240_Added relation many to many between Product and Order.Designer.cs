@@ -12,8 +12,8 @@ using Shop.Persistence.EF;
 namespace Shop.Persistence.EF.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20220910151644_Added CompletetOrders entity")]
-    partial class AddedCompletetOrdersentity
+    [Migration("20220910174240_Added relation many to many between Product and Order")]
+    partial class AddedrelationmanytomanybetweenProductandOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,41 +99,17 @@ namespace Shop.Persistence.EF.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Shop.Domain.Entities.CompletedOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Shipment")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CompletedOrders");
-                });
-
             modelBuilder.Entity("Shop.Domain.Entities.OrderProduct", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderId", "ProductId");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProductId");
+                    b.HasKey("ProductId", "OrderId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderProduct");
                 });
@@ -145,9 +121,6 @@ namespace Shop.Persistence.EF.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BasketId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -165,8 +138,6 @@ namespace Shop.Persistence.EF.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.HasIndex("UserId");
 
@@ -340,20 +311,9 @@ namespace Shop.Persistence.EF.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Shop.Domain.Entities.CompletedOrder", b =>
-                {
-                    b.HasOne("Shop.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Shop.Domain.Entities.OrderProduct", b =>
                 {
-                    b.HasOne("Shop.Domain.Entities.CompletedOrder", "Order")
+                    b.HasOne("Shop.Domain.Entities.OrderToSend", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -372,19 +332,11 @@ namespace Shop.Persistence.EF.Migrations
 
             modelBuilder.Entity("Shop.Domain.Entities.OrderToSend", b =>
                 {
-                    b.HasOne("Shop.Domain.Entities.ShoppingCart", "Basket")
-                        .WithMany()
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Shop.Domain.Entities.Customer", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Basket");
 
                     b.Navigation("User");
                 });

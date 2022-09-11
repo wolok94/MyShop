@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Mapper
+namespace Shop.Application
 {
     public static class AddShopApplication
     {

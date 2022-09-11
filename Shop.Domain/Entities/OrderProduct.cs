@@ -10,7 +10,7 @@ namespace Shop.Domain.Entities
     {
         public Product Product { get; set; }
         public int ProductId { get; set; }
-        public CompletedOrder Order { get; set; }
+        public OrderToSend Order { get; set; }
         public int OrderId { get; set; }
     }
 }

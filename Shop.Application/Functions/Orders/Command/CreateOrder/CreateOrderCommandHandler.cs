@@ -35,10 +35,10 @@ namespace Shop.Application.Functions.Orders.Command.CreateOrder
             {
                 throw new ValidationShopException(validatorResult);
             }
-            request.BasketId = (int)_userContext.GetShoppingCartId;
+            var shoppingCartId = (int)_userContext.GetShoppingCartId;
             request.UserId = (int)_userContext.GetUserId;
             var order = _mapper.Map<OrderToSend>(request);
-            order = await _orderRepository.CreateOrder(order);
+            order = await _orderRepository.CreateOrder(order, shoppingCartId);
             return order.Id;
         }
     }
