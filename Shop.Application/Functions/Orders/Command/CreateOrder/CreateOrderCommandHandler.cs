@@ -4,6 +4,7 @@ using Shop.Application.Contracts.Persistence;
 using Shop.Application.Functions.Categories.Commands.CreateCategory;
 using Shop.Application.Functions.Exceptions;
 using Shop.Application.Functions.Orders.Command.CreateOrder;
+using Shop.Application.UsersContext;
 using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;

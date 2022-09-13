@@ -78,6 +78,12 @@ namespace Shop.Persistence.EF.Repositories
             {
                 throw new EmailExistException("Account with this email exist");
             }
+            if (await IsAddressExist(user))
+            {
+                user.Address = await _dbContext.Addresses.SingleOrDefaultAsync(x => x.City == user.Address.City
+            && x.Street == user.Address.Street && x.HouseNumber == user.Address.HouseNumber
+            && x.PostalCode == user.Address.PostalCode);
+            }
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileReader.ReadRegistrationFile(password, user.NickName));
@@ -87,6 +93,16 @@ namespace Shop.Persistence.EF.Repositories
         private async Task<bool> IsEmailExist(User user)
         {
             if (await _dbContext.Users.AnyAsync(x => x.Email == user.Email))
+            {
+                return true;
+            }
+            return false;
+        }
+        private async Task<bool> IsAddressExist(User user)
+        {
+            if (await _dbContext.Addresses.AnyAsync(x => x.City.ToLower() == user.Address.City .ToLower()
+            && x.Street.ToLower() == user.Address.Street.ToLower() && x.HouseNumber.ToLower() == user.Address.HouseNumber.ToLower()
+            && x.PostalCode.ToLower() == user.Address.PostalCode.ToLower()))
             {
                 return true;
             }

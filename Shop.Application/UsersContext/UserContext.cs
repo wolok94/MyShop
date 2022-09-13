@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application
+namespace Shop.Application.UsersContext
 {
     public class UserContext : IUserContext
     {
@@ -16,9 +16,9 @@ namespace Shop.Application
         {
             this.httpContextAccessor = httpContextAccessor;
         }
-        public int? GetUserId => User == null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+        public int? GetUserId => User == null ? null : int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
-        public int? GetShoppingCartId => User == null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == "BasketId").Value);
+        public int? GetShoppingCartId => User == null ? null : int.Parse(User.FindFirst(c => c.Type == "BasketId").Value);
 
         public ClaimsPrincipal User => httpContextAccessor.HttpContext.User;
     }

@@ -3,6 +3,7 @@ using MediatR;
 using Shop.Application.Contracts.Persistence;
 using Shop.Application.Functions.Baskets.Command.CreateBasket;
 using Shop.Application.Functions.Exceptions;
+using Shop.Application.UsersContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
