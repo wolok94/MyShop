@@ -3,6 +3,7 @@ using MediatR;
 using Shop.Application.Contracts.Persistence;
 using Shop.Application.Functions.Products.Queries.GetProductsList;
 using Shop.Domain.Entities;
+using Shop.Persistence.EF.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,21 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Functions.Products.GetProductsList
 {
-    public class GetPostsListQueryHandler : IRequestHandler<GetProductsListQuery, List<ProductInListViewModel>>
+    public class GetPostsListQueryHandler : IRequestHandler<GetProductsListQuery, PagedResult<Product>>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<Product> _postRepository;
+        private readonly IProductRepository _productRepository;
 
-        public GetPostsListQueryHandler(IMapper mapper, IAsyncRepository<Product> postRepository)
+        public GetPostsListQueryHandler(IMapper mapper, IProductRepository productRepository)
         {
             _mapper = mapper;
-            _postRepository = postRepository;
+            _productRepository = productRepository;
         }
-        public async Task<List<ProductInListViewModel>> Handle(GetProductsListQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<Product>> Handle(GetProductsListQuery request, CancellationToken cancellationToken)
         {
-            var all = await _postRepository.GetAll();
-            var allOrdered = all.OrderBy(x => x.Title);
+            var all = await _productRepository.GetProducts(request.ProductQuery);
 
-            return _mapper.Map<List<ProductInListViewModel>>(allOrdered);
+            return _mapper.Map<PagedResult<Product>>(all);
         }
     }
 }
