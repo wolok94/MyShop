@@ -38,6 +38,8 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<EmailAppSettingsConfig>(builder.Configuration.GetSection("EmailCredentials"));
 builder.Services.AddScoped<ExceptionCatcherMiddleware>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
@@ -48,7 +50,16 @@ app.UseAuthentication();
 app.UseMiddleware<ExceptionCatcherMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin();
+});
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop");
+    c.RoutePrefix = string.Empty;
+});
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

@@ -7,6 +7,7 @@ using Shop.Application.Functions.Products.Commands.UpdateProduct;
 using Shop.Application.Functions.Products.GetProductDetail;
 using Shop.Application.Functions.Products.GetProductsList;
 using Shop.Application.Functions.Users.Queries.GetUserDetail;
+using Shop.Persistence.EF.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,9 @@ namespace Shop.Api.Controllers
 
         [HttpGet(Name = "GetAllproducts")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts([FromQuery] ProductQuery productQuery)
         {
-            var products = await _mediator.Send(new GetProductsListQuery());
+            var products = await _mediator.Send(new GetProductsListQuery { ProductQuery = productQuery});
             return Ok(products);
         }
         [HttpGet("{id}", Name = "GetProduct")]

@@ -15,8 +15,8 @@ namespace Shop.Persistence.EF.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasOne(a => a.Address)
-                .WithOne(u => u.User)
-                .HasForeignKey<User>(x => x.AddressId);
+                .WithMany(u => u.Users)
+                .HasForeignKey(x => x.AddressId);
 
 
 

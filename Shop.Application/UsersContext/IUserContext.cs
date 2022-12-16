@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application
+namespace Shop.Application.UsersContext
 {
     public interface IUserContext
     {

@@ -90,3 +90,5 @@ Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated p
 Shop.Persistence.EF/Migrations/20220905144437_Added quantity and dateOfCreated property in BasketProduct.Designer.cs
 .vs/Shop/v17/Browse.VC.db
 *.log
+Shop.Persistence.EF/Migrations/20220912092352_Changed relation between User and Address on one to many.cs
+Shop.Persistence.EF/Migrations/20220912092352_Changed relation between User and Address on one to many.Designer.cs

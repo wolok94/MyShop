@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,8 +20,10 @@ namespace Shop.Persistence.EF
 {
     public static class PersistenceWithEfRegistration
     {
+
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddDbContext<ShopDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("ShopConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));

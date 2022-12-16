@@ -1,0 +1,18 @@
+<hr>
+<div class="row text-center">
+  <h3>Witaj w sklepie!</h3>
+</div>
+<hr>
+<div class="row row-cols-4">
+  <div class="col-xs-12" *ngFor="let product of loadedProducts">
+    <div class="card text-center text-bg-light mb-3" style="width: 300px;"  >
+        <img [src]='product.imageUrl' style="width: 290px" class="card-img-top" [alt]="product.title">
+        <div class="card-body" >
+          <h5 class="card-title">{{product.title}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          <a href="#" class="btn btn-primary ">Kup</a>
+        </div>
+  </div>
+    </div>
+</div>
+
