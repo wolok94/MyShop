@@ -14,15 +14,15 @@ namespace Shop.Application.Functions.Categories.Queries.GetCategoryDetail;
 public class GetCategoryDetailsQueryHandler : IRequestHandler<GetCategoryDetailsQuery, CategoryViewModel>
 {
     private readonly IMapper _mapper;
-    private readonly IAsyncRepository<Category> _repository;
-    public GetCategoryDetailsQueryHandler(IMapper mapper, IAsyncRepository<Category> repository)
+    private readonly ICategoryRepository _repository;
+    public GetCategoryDetailsQueryHandler(IMapper mapper, ICategoryRepository repository)
     {
         _mapper = mapper;
         _repository = repository;
     }
     public async Task<CategoryViewModel> Handle(GetCategoryDetailsQuery request, CancellationToken cancellationToken)
     {
-        var category = await _repository.GetByIdAsync(request.Id);
-        return _mapper.Map<CategoryViewModel>(category);
+        var category = await _repository.GetCategoryById(request.Id);
+        return category;
     }
 }

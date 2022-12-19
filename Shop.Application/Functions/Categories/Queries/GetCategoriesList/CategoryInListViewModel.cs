@@ -8,7 +8,7 @@ namespace Shop.Application.Functions.Categories.Queries.GetCategoriesList
 {
     public class CategoryInListViewModel
     {
-
+        public int CategoryId { get; set; }
         public string Name { get; set; }
     }
 }
