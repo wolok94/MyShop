@@ -16,7 +16,7 @@
               Kategorie
             </a>
             <ul class="dropdown-menu" >
-              <li><a class="dropdown-item" *ngFor="let category of loadedCategories" >{{category.name}}</a></li>
+              <li><a class="dropdown-item "  *ngFor="let category of loadedCategories" (click)="clickedCategory(category)" >{{category.name}}</a></li>
 
             </ul>
 

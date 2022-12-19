@@ -22,4 +22,8 @@ export class CategoryService {
       return categoryArray;
     }));
   }
+  
+  fetchCategory(id: number){
+    return this.http.get<CategoryModel>("https://localhost:63150/api/Category/" + id);
+  }
 }

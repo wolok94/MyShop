@@ -22,5 +22,8 @@ export class HeaderComponent implements OnInit {
     onLogin(){
       this.router.navigate(['login']);
     }
+    clickedCategory(chosenCategory: CategoryModel){
+      this.router.navigate(['category/' + chosenCategory.categoryId]);
+    }
   }
 
