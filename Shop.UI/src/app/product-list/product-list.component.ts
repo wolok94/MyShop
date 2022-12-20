@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductModel } from '../Models/product.model';
 import { ProductPagedResultModel } from '../Models/product_paged_result.model';
 import { ProductService } from '../Services/product.service';
+import { ShoppingCartService } from '../Services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +13,8 @@ import { ProductService } from '../Services/product.service';
 export class ProductListComponent implements OnInit {
   loadedProducts: ProductModel[] = [];
   productPagedResultProducts: ProductPagedResultModel;
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private shoppingCartService: ShoppingCartService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.productService.fetchProducts().subscribe(products => {
@@ -19,4 +22,9 @@ export class ProductListComponent implements OnInit {
       this.loadedProducts = this.productPagedResultProducts['items'];
     })}
 
+    onBuyClick(product: ProductModel){
+      this.shoppingCartService.addProductToShoppingCart(product).subscribe(response => {
+        console.log(response);
+      });
+    }
 }
