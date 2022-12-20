@@ -29,7 +29,7 @@ namespace Shop.Application.Functions.Baskets.Command.AddProductsToBasket
             var ShoppingCartId = _userContext.GetShoppingCartId;
             var product = request.Product;
             var quantity = request.Quantity;
-            var price = await _basketRepository.AddProductToShoppingCart(ShoppingCartId, product, quantity);
+            var price = await _basketRepository.AddProductToShoppingCart(product, quantity);
             return price;
         }
     }

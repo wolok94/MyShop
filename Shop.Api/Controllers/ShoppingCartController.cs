@@ -27,10 +27,9 @@ namespace Shop.Api.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetBasket([FromRoute] int id)
+        public async Task<IActionResult> GetBasket()
         {
-            var basket = await _mediator.Send(new GetDetailCartQuery { Id = id });
+            var basket = await _mediator.Send(new GetDetailCartQuery());
             return Ok(basket);
         }
         [HttpPost]

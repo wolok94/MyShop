@@ -33,7 +33,7 @@ namespace Shop.Persistence.EF.Repositories
         {
             await _dbContext.Orders.AddAsync(order);
             await _dbContext.SaveChangesAsync();
-            var shoppingCart = await _mediator.Send(new GetShoppingCartQuery() { Id = id });
+            var shoppingCart = await _mediator.Send(new GetShoppingCartQuery());
             var orderToSend = await _dbContext.Orders
                 .Include(x => x.User)
                 .Include(x => x.Products)

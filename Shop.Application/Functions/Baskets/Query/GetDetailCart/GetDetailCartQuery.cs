@@ -10,6 +10,5 @@ namespace Shop.Application.Functions.Baskets.Query.GetDetailBasket
 {
     public class GetDetailCartQuery : IRequest<GetDetailCartView>
     {
-        public int Id { get; set; }
     }
 }
