@@ -14,15 +14,15 @@ namespace Shop.Application.Functions.Categories.Queries.GetCategoriesList
     public class GetCategoryInListQueryHandler : IRequestHandler<GetCategoryInListQuery, List<CategoryInListViewModel>>
     {
         private readonly IMapper _mapper;
-        private readonly IAsyncRepository<Category> _repository;
-        public GetCategoryInListQueryHandler(IMapper mapper, IAsyncRepository<Category> repository)
+        private readonly ICategoryRepository _repository;
+        public GetCategoryInListQueryHandler(IMapper mapper, ICategoryRepository repository)
         {
             _mapper = mapper;
             _repository = repository;
         }
         public async Task<List<CategoryInListViewModel>> Handle(GetCategoryInListQuery request, CancellationToken cancellationToken)
         {
-            var categories = await _repository.GetAll();
+            var categories = await _repository.GetCategories();
             var ordered = categories.OrderBy(x => x.Name);
             return _mapper.Map<List<CategoryInListViewModel>>(ordered);
         }

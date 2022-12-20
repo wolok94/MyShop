@@ -53,6 +53,8 @@ app.UseRouting();
 app.UseCors(policy =>
 {
     policy.AllowAnyOrigin();
+    policy.AllowAnyMethod();
+    policy.AllowAnyHeader();
 });
 app.UseSwagger();
 app.UseSwaggerUI(c =>

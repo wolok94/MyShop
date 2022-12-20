@@ -22,7 +22,7 @@ namespace Shop.Application.Functions.Baskets.Query.GetDetailBasket
         }
         public async Task<GetDetailCartView> Handle(GetDetailCartQuery request, CancellationToken cancellationToken)
         {
-            var shoppingCart = await _shoppingCartRepository.GetShoppingCartById(request.Id);
+            var shoppingCart = await _shoppingCartRepository.GetShoppingCartById();
             var mappedBasket = _mapper.Map<GetDetailCartView>(shoppingCart);
             return mappedBasket;
         }

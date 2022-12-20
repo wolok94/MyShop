@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <form (ngSubmit)="onSubmit(f)"  #f="ngForm">
+                 <div class="form-floating mb-3">
+                    <input type="nickName"
+                     class="form-control"
+                      id="floatingInput"
+                      name="nickName"
+                      class="form-control"
+                      required
+                      ngModel
+                      placeholder="User Name"
+                    >
+                    <label for="floatingInput">UserName</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password"
+                     class="form-control"
+                      id="floatingPassword"
+                       placeholder="Password"
+                       name="password"
+                       class="form-control"
+                       required
+                       ngModel
+                       >
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                <button class="btn btn-primary">Zaloguj się</button>
+            </form>
+        </div>
+    </div>
+</div>

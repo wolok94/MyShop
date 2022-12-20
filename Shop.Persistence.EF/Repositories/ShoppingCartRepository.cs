@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Application.Contracts.Persistence;
+using Shop.Application.UsersContext;
 using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,17 @@ namespace Shop.Persistence.EF.Repositories
     public class ShoppingCartRepository : BaseRepository<ShoppingCart>, IShoppingCartRepository
     {
         private readonly ShopDbContext _dbContext;
+        private readonly IUserContext _userContext;
 
-        public ShoppingCartRepository(ShopDbContext dbContext) : base(dbContext)
+        public ShoppingCartRepository(ShopDbContext dbContext, IUserContext userContext) : base(dbContext)
         {
             _dbContext = dbContext;
+            _userContext = userContext;
         }
 
-        public async Task<double> AddProductToShoppingCart(int? id, Product product, int quantity)
+        public async Task<double> AddProductToShoppingCart(Product product, int quantity)
         {
-            var shoppingCart = await GetShoppingCart(id);
+            var shoppingCart = await GetShoppingCart();
 
             var productToUpdate = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
             shoppingCart.Products.Add(productToUpdate);
@@ -34,13 +37,14 @@ namespace Shop.Persistence.EF.Repositories
         }
         public async Task DeleteProductFromShoppingCart(int shoppingCartId, Product product)
         {
-            var shoppingCart = await GetShoppingCart(shoppingCartId);
+            var shoppingCart = await GetShoppingCart();
             var productToDelete = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
             shoppingCart.Products.Remove(productToDelete);
             await _dbContext.SaveChangesAsync();
         }
-        public async Task<ShoppingCart> GetShoppingCartById(int shoppingCartId)
+        public async Task<ShoppingCart> GetShoppingCartById()
         {
+            var shoppingCartId = _userContext.GetShoppingCartId;
             var shoppingCart = await _dbContext.ShoppingCarts
                 .Include(x => x.Products)
                 .ThenInclude(p => p.Category)
@@ -48,8 +52,9 @@ namespace Shop.Persistence.EF.Repositories
                 .FirstOrDefaultAsync(x => x.Id == shoppingCartId);
             return shoppingCart;
         }
-        private async Task<ShoppingCart> GetShoppingCart(int? id)
+        private async Task<ShoppingCart> GetShoppingCart()
         {
+            var id = _userContext.GetShoppingCartId;
             var shoppingCart = await _dbContext.ShoppingCarts
             .Include(x => x.Products)
             .FirstOrDefaultAsync(x => x.Id == id);
@@ -57,7 +62,7 @@ namespace Shop.Persistence.EF.Repositories
         }
         public async Task DeleteProductsFromShoppingCart(int shoppingCartId)
         {
-            var shoppingCart = await GetShoppingCart(shoppingCartId);
+            var shoppingCart = await GetShoppingCart();
             shoppingCart.Products.Clear();
             await _dbContext.SaveChangesAsync();
 

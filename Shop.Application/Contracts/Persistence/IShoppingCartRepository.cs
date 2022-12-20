@@ -9,9 +9,9 @@ namespace Shop.Application.Contracts.Persistence
 {
     public interface IShoppingCartRepository : IAsyncRepository<ShoppingCart>
     {
-        Task<double> AddProductToShoppingCart(int? id, Product product, int quantity);
+        Task<double> AddProductToShoppingCart( Product product, int quantity);
         Task DeleteProductFromShoppingCart(int basketId, Product product);
         Task DeleteProductsFromShoppingCart(int shoppingCartId);
-        Task<ShoppingCart> GetShoppingCartById(int basketId);
+        Task<ShoppingCart> GetShoppingCartById();
     }
 }
