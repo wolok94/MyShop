@@ -25,5 +25,8 @@ export class HeaderComponent implements OnInit {
     clickedCategory(chosenCategory: CategoryModel){
       this.router.navigate(['category/' + chosenCategory.categoryId]);
     }
+    shoppingCartClicked(){
+      this.router.navigate(['shoppingCart']);
+    }
   }
 

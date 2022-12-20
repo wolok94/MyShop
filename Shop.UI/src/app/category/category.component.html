@@ -1,14 +1,12 @@
 <hr>
-<div class="row text-center">
-  <h3>Witaj w sklepie!</h3>
-</div>
-<hr>
-<div class="row row-cols-4" *ngIf="products?.length>0; else categoryIsEmpty">
+
+<div class="row row-cols-6" *ngIf="products?.length>0; else categoryIsEmpty">
   <div class="col-xs-12" *ngFor="let product of products">
-    <div class="card text-center text-bg-light mb-3" style="width: 300px;"  >
+    <div class="card text-center text-bg-light mb-3" style="width: 200px;"  >
         <img [src]='product.imageUrl'  class="card-img-top img-fluid " [alt]="product.title">
         <div class="card-body" >
           <h5 class="card-title">{{product.title}}</h5>
+          <p class="card-text">Cena: {{product.price}} zł</p>
           <p class="card-text">{{product.description}}</p>
           <a href="#" class="btn btn-primary ">Kup</a>
         </div>
