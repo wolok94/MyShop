@@ -8,17 +8,18 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-
+  loadedShoppingCart: ShoppingCartModel;
   constructor(private httpClient: HttpClient, private auth:AuthService) { }
 
   addProductToShoppingCart(product: ProductModel){
-    const json = JSON.stringify(product);
-    return this.httpClient.patch("https://localhost:63150/api/basket", json
-    , {headers: new HttpHeaders({"Authorization": "Bearer "+this.auth.response})});
+    return this.httpClient.patch("https://localhost:63150/api/basket", {product})
   }
 
   fetchShoppingCart(){
-    return this.httpClient.get<ShoppingCartModel>("https://localhost:63150/api/Basket",
-    {headers: new HttpHeaders({"Authorization": "Bearer "+this.auth.response})});
+    return this.httpClient.get<ShoppingCartModel>("https://localhost:63150/api/Basket")
+  }
+
+  deleteProductFromShoppingCart(product: ProductModel){
+    return this.httpClient.delete("https://localhost:63150/api/Basket", {body: {product}});
   }
 }

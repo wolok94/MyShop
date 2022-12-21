@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private responseData: any;
+
   constructor(private httpClient: HttpClient, private router:Router) { }
 
 
-  get response(){
-    return this.responseData;
+  get token(){
+    return localStorage.getItem('token');
   }
 
   logIn(nickName:string, password:string){
@@ -19,8 +19,7 @@ export class AuthService {
     .subscribe(response => {
       if (response)
       {
-        this.responseData = response;
-        localStorage.setItem('token', this.responseData);
+        localStorage.setItem('token',response);
         this.router.navigate(['']);
       }
 

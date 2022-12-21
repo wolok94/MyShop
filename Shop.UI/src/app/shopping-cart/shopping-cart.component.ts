@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductModel } from '../Models/product.model';
 import { ShoppingCartModel } from '../Models/shopping-cart.model';
 import { ShoppingCartService } from '../Services/shopping-cart.service';
 
@@ -8,13 +9,33 @@ import { ShoppingCartService } from '../Services/shopping-cart.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  loadedShoppingCart: ShoppingCartModel;
+
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.shoppingCartService.fetchShoppingCart()
       .subscribe(shoppingCart => {
-        this.loadedShoppingCart = shoppingCart;
+        this.shoppingCartService.loadedShoppingCart = shoppingCart;
+
+      })
+
+  }
+
+  priceOfOrder(){
+    let price = 0;
+    for(let product of this.shoppingCartService.loadedShoppingCart.products){
+      price += product.price;
+    }
+    return price;
+  }
+
+  get shoppingCart(){
+    return this.shoppingCartService.loadedShoppingCart;
+  }
+  deleteProductFromShoppingCart(product: ProductModel){
+    this.shoppingCartService.deleteProductFromShoppingCart(product)
+      .subscribe(response => {
+        console.log(response);
       })
   }
 
