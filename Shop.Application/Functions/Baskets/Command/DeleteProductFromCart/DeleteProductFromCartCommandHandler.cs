@@ -21,7 +21,7 @@ namespace Shop.Application.Functions.Baskets.Command.DeleteProductFromBasket
         }
         public async Task<Unit> Handle(DeleteProductFromCartCommand request, CancellationToken cancellationToken)
         {
-            await _shoppingCartRepository.DeleteProductFromShoppingCart(request.ShoppingCartId, request.Product);
+            await _shoppingCartRepository.DeleteProductFromShoppingCart(request.Product);
             return Unit.Value;
         }
     }

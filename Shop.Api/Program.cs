@@ -31,6 +31,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddControllers().AddJsonOptions(option =>
     option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddCors(options => options.AddPolicy("Cors", builder =>
+{
+    builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+
+}));
 builder.Services.AddAuthorization();
 builder.Services.InstallShopApplication();
 builder.Services.AddPersistenceServices(builder.Configuration);
@@ -50,12 +55,7 @@ app.UseAuthentication();
 app.UseMiddleware<ExceptionCatcherMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(policy =>
-{
-    policy.AllowAnyOrigin();
-    policy.AllowAnyMethod();
-    policy.AllowAnyHeader();
-});
+app.UseCors("Cors");
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
