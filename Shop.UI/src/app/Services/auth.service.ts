@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  isLogedIn: boolean = false;
+
   constructor(private httpClient: HttpClient, private router:Router) { }
 
 
@@ -21,6 +23,7 @@ export class AuthService {
       {
         localStorage.setItem('token',response);
         this.router.navigate(['']);
+        this.isLogedIn = true;
       }
 
     });

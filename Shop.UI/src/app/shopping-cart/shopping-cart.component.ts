@@ -16,7 +16,6 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.fetchShoppingCart()
       .subscribe(shoppingCart => {
         this.shoppingCartService.loadedShoppingCart = shoppingCart;
-
       })
 
   }
