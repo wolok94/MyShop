@@ -35,11 +35,11 @@ namespace Shop.Api.Controllers
             return Ok(customer);
         }
 
-        [HttpGet("{id}", Name = "GetCustomer")]
+        [HttpGet("{nickName}", Name = "GetCustomer")]
 
-        public async Task<IActionResult> GetCustomer(int id)
+        public async Task<IActionResult> GetCustomer([FromRoute] string nickName)
         {
-            var customer = await _mediator.Send(new GetCustomerDetailQuery() { Id = id });
+            var customer = await _mediator.Send(new GetCustomerDetailQuery() { Nickname = nickName });
             return Ok(customer);
         }
         [HttpPost(Name = "CreateCustomer")]
