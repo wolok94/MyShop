@@ -38,7 +38,6 @@ namespace Shop.Application.Mapper
             CreateMap<Category, CategoryInListViewModel>().ReverseMap();
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
             CreateMap<UpdateCategoryCommand, Category>();
-            CreateMap<User, CustomerViewModel>().ReverseMap();
             CreateMap<CommentsView, Comment>().ReverseMap()
                 .ForMember(c => c.UserName, x => x.MapFrom(x => x.User.NickName));
             CreateMap<CreateCustomerCommand, Customer>();
@@ -52,6 +51,7 @@ namespace Shop.Application.Mapper
                 .ForMember(x => x.NickName, x=> x.MapFrom(x => x.Customer.NickName));
             CreateMap<ProductView, Product>().ReverseMap()
                 .ForMember(x => x.CategoryName, x => x.MapFrom(x => x.Category.Name));
+            CreateMap<Customer, Functions.Users.Queries.Login.LogedUserDto>();
 
 
             
