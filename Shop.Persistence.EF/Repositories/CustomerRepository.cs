@@ -97,9 +97,12 @@ namespace Shop.Persistence.EF.Repositories
         }
         public async Task<LogedUserDto> GetUserByNickName(string nickName)
         {
-            var user = await _dbContext.Users
+            var user = await _dbContext.Users.OfType<Customer>()
                 .AsNoTracking()
                 .Include(x => x.Address)
+                .Include(x => x.ShoppingCart)
+                .ThenInclude(x => x.Products)
+                .Include(x => x.Role)
                 .FirstOrDefaultAsync(x => x.NickName == nickName);
 
             var logedUser = _mapper.Map<LogedUserDto>(user);

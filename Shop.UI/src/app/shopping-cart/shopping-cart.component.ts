@@ -9,20 +9,23 @@ import { ShoppingCartService } from '../Services/shopping-cart.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+  products: ProductModel[];
+  constructor(private shoppingCartService: ShoppingCartService) { 
 
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  }
 
   ngOnInit(): void {
     this.shoppingCartService.fetchShoppingCart()
-      .subscribe(shoppingCart => {
-        this.shoppingCartService.loadedShoppingCart = shoppingCart;
-      })
+    .subscribe(shoppingCart => {
+      this.shoppingCartService.loadedShoppingCart = shoppingCart;
+      this.products = shoppingCart.products;
+    })
 
   }
 
   priceOfOrder(){
     let price = 0;
-    for(let product of this.shoppingCartService.loadedShoppingCart.products){
+    for(let product of this.products){
       price += product.price;
     }
     return price;
@@ -35,6 +38,7 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.deleteProductFromShoppingCart(product)
       .subscribe(response => {
         console.log(response);
+        this.ngOnInit();
       })
   }
 

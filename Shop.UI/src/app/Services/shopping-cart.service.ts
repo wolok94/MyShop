@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ProductModel } from '../Models/product.model';
 import { ShoppingCartModel } from '../Models/shopping-cart.model';
 import { AuthService } from './auth.service';
@@ -9,6 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class ShoppingCartService {
   loadedShoppingCart: ShoppingCartModel;
+
   constructor(private httpClient: HttpClient, private auth:AuthService) { }
 
   addProductToShoppingCart(product: ProductModel){

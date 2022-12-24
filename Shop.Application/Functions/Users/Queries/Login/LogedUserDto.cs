@@ -1,4 +1,5 @@
-﻿using Shop.Domain.Entities;
+﻿using Shop.Application.DtoModels;
+using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,12 @@ namespace Shop.Application.Functions.Users.Queries.Login
         public int Id { get; set; }
         public string Email { get; set; }
         public string NickName { get; set; }
-        public Address Address { get; set; }
+        public UserAddressDto Address { get; set; }
         public int AddressId { get; set; }
-        public Role Role { get; set; }
+        public UserRoleDto Role { get; set; }
         public int RoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public List<OrderToSend> Orders { get; set; }
-        public ShoppingCart ShoppingCart { get; set; }
-        public string GeneratedToken { get; set; }
+        public UserShoppingCartDto ShoppingCart { get; set; }
     }
 }

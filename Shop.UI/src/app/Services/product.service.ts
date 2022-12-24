@@ -8,11 +8,14 @@ import { ProductPagedResultModel } from '../Models/product_paged_result.model';
   providedIn: 'root'
 })
 export class ProductService {
-
+  countOfProductsInShoppingCart : number;
   constructor(private http:HttpClient) { }
 
   fetchProducts(){
     return this.http.get<ProductPagedResultModel>("https://localhost:63150/api/Product");
     
+  }
+  setCountOfProducts(num : number){
+    this.countOfProductsInShoppingCart += num;
   }
 }
