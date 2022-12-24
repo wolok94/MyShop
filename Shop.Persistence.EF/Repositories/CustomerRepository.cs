@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -31,9 +32,12 @@ namespace Shop.Persistence.EF.Repositories
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
         private readonly IEmail _email;
+        private readonly IMapper _mapper;
         private string generatedToken;
 
-        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher, ITokenService tokenService, IConfiguration configuration, IMediator mediator, IEmail email) : base(dbContext)
+        public CustomerRepository(ShopDbContext dbContext, IPasswordHasher<Customer> passwordHasher
+            , ITokenService tokenService, IConfiguration configuration
+            , IMediator mediator, IEmail email, IMapper mapper) : base(dbContext)
         {
             _dbContext = dbContext;
             _passwordHasher = passwordHasher;
@@ -41,6 +45,7 @@ namespace Shop.Persistence.EF.Repositories
             _configuration = configuration;
             _mediator = mediator;
             _email = email;
+            _mapper = mapper;
         }
 
         public async Task<string> Login( LoginDto dto)
@@ -67,7 +72,7 @@ namespace Shop.Persistence.EF.Repositories
             }
             if (customer != null)
             {
-                generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), customer, shoppingCart);
+                generatedToken = generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), customer, shoppingCart);
 
             }
             return generatedToken;
@@ -89,6 +94,19 @@ namespace Shop.Persistence.EF.Repositories
             var messageParams = new MessageParams(user.Email, "Rejestracja", user.NickName, await FileReader.ReadRegistrationFile(password, user.NickName));
             await _email.SendEmail(messageParams);
             return (Customer)user;
+        }
+        public async Task<LogedUserDto> GetUserByNickName(string nickName)
+        {
+            var user = await _dbContext.Users.OfType<Customer>()
+                .AsNoTracking()
+                .Include(x => x.Address)
+                .Include(x => x.ShoppingCart)
+                .ThenInclude(x => x.Products)
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync(x => x.NickName == nickName);
+
+            var logedUser = _mapper.Map<LogedUserDto>(user);
+            return logedUser;
         }
         private async Task<bool> IsEmailExist(User user)
         {

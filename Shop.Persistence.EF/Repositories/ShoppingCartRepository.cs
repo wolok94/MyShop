@@ -35,7 +35,7 @@ namespace Shop.Persistence.EF.Repositories
             return price;
 
         }
-        public async Task DeleteProductFromShoppingCart(int shoppingCartId, Product product)
+        public async Task DeleteProductFromShoppingCart(Product product)
         {
             var shoppingCart = await GetShoppingCart();
             var productToDelete = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);

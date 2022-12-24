@@ -19,5 +19,6 @@ namespace Shop.Domain.Entities
         public int RoleId { get; set; }
 
 
+
     }
 }

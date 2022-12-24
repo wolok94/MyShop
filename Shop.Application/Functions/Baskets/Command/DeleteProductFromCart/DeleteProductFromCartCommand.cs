@@ -10,7 +10,6 @@ namespace Shop.Application.Functions.Baskets.Command.DeleteProductFromBasket
 {
     public class DeleteProductFromCartCommand : IRequest
     {
-        public int ShoppingCartId { get; set; }
         public Product Product { get; set; }
     }
 }

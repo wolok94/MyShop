@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { UserModel } from '../Models/user.model';
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -9,6 +11,8 @@ import { AuthService } from '../Services/auth.service';
 })
 export class LoginComponent implements OnInit {
   responseData : any;
+
+  user : UserModel;
   constructor(private loginService: AuthService) { }
 
   ngOnInit(): void {
@@ -16,7 +20,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm){
     const credentials = form.value;
-    this.loginService.logIn(credentials.nickName, credentials.password)
+    this.loginService.logIn(credentials.nickName, credentials.password);
+    if(this.loginService.logIn)
+    {
+    this.loginService.getUserByNickName(credentials.nickName)
+      .subscribe(res => {
+        this.user = res;
+        this.loginService.userSubject.next(this.user);
+      });
+
+    }
+
+
   }
 
 }
