@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { LoginComponent } from '../auth/login.component';
 import { CategoryModel } from '../Models/category.model';
 import { AuthService } from '../Services/auth.service';
@@ -14,12 +14,17 @@ import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   loadedCategories: CategoryModel[];
   isLoged : boolean;
-  countOfProducts: number = 0;
+  userSub = new Subscription;
+  productSub = new Subscription;
   constructor(private categoryService: CategoryService, private router: Router,
     private shoppingCartService: ShoppingCartService, private authService : AuthService) { }
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
+    this.productSub.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.categoryService.fetchCategories().subscribe(categories => {
@@ -27,10 +32,13 @@ export class HeaderComponent implements OnInit {
         
       });
       this.isLoged = localStorage.getItem("isLoged") == "true";
-      
-      
-
-    }
+      this.productSub = this.shoppingCartService.addCountOfProducts.subscribe(res => {
+        this.shoppingCartService.loadedShoppingCart.products.push(res);
+      })
+      this.userSub = this.authService.userSubject.subscribe(res => {
+        this.shoppingCartService.loadedShoppingCart = res['shoppingCart'];
+      });
+      }
 
     onLogin(){
       this.router.navigate(['login']);
@@ -42,11 +50,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['shoppingCart']);
     }
     get numberOfProducts(){
-      
-      this.authService.userSubject.subscribe(res => {
-        console.log(res['shoppingCart']);
-        this.shoppingCartService.loadedShoppingCart = res['shoppingCart'];
-      });
+
         if(this.isLoged && this.shoppingCartService.loadedShoppingCart != undefined)
         {
         return this.shoppingCartService.loadedShoppingCart.products.length

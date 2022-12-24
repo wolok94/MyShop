@@ -10,8 +10,9 @@ import { AuthService } from './auth.service';
 })
 export class ShoppingCartService {
   loadedShoppingCart: ShoppingCartModel;
+  addCountOfProducts = new Subject<ProductModel>();
 
-  constructor(private httpClient: HttpClient, private auth:AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   addProductToShoppingCart(product: ProductModel){
     return this.httpClient.patch("https://localhost:63150/api/basket", {product})
