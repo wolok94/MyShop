@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserModel } from '../Models/user.model';
 import { AuthService } from '../Services/auth.service';
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   responseData : any;
 
   user : UserModel;
-  constructor(private loginService: AuthService) { }
+  constructor(private loginService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -28,10 +29,11 @@ export class LoginComponent implements OnInit {
         this.user = res;
         this.loginService.userSubject.next(this.user);
       });
-
     }
+      }
 
-
-  }
+      register(){
+      this.router.navigate(["./register"]);
+      }
 
 }

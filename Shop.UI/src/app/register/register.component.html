@@ -1,0 +1,144 @@
+<div class="container">
+    <form   
+    #f="ngForm"
+    (ngSubmit)="onRegister(f)">
+    <div class="row">
+        <div class="col-4">
+
+                 <div class="form-floating mb-3">
+                    <input type="text"
+                     class="form-control"
+                      id="floatingInput"
+                      name="FirstName"
+                      class="form-control"
+                      required
+                      ngModel
+                      placeholder="FirstName"
+                    >
+                    <label for="floatingInput">FirstName</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text"
+                     class="form-control"
+                      id="floatingInput"
+                       placeholder="LastName"
+                       name="LastName"
+                       class="form-control"
+                       required
+                       ngModel
+                       >
+                    <label for="floatingInput">LastName</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="e-mail"
+                     class="form-control"
+                      id="floatingInput"
+                       placeholder="Email"
+                       name="Email"
+                       class="form-control"
+                       required
+                       ngModel
+                       >
+                    <label for="floatingInput">Email</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text"
+                     class="form-control"
+                      id="floatingInput"
+                       placeholder="UserName"
+                       name="UserName"
+                       class="form-control"
+                       required
+                       ngModel
+                       >
+                    <label for="floatingInput">UserName</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password"
+                     class="form-control"
+                      id="floatingPassword"
+                       placeholder="Password"
+                       name="Password"
+                       class="form-control"
+                       required
+                       ngModel
+                       >
+                    <label for="floatingInput">Password</label>
+                  </div>
+                  <button class="btn btn-primary">Zarejestruj się</button>
+
+
+                  
+                  
+
+
+        </div>
+        <div class="col-4">
+            <label>Address:</label>
+            <div class="form-floating mb-3">
+              <input type="text"
+               class="form-control"
+                id="floatingInput"
+                 placeholder="Country"
+                 name="Country"
+                 class="form-control"
+                 required
+                 ngModel
+                 >
+              <label for="floatingInput">Country</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text"
+               class="form-control"
+                id="floatingInput"
+                 placeholder="Street"
+                 name="City"
+                 class="form-control"
+                 required
+                 ngModel
+                 >
+                 
+              <label for="floatingInput">City</label>
+            </div>
+              <div class="form-floating mb-3">
+              <input type="text"
+               class="form-control"
+                id="floatingInput"
+                 placeholder="Street"
+                 name="Street"
+                 class="form-control"
+                 required
+                 ngModel
+                 >
+                 
+              <label for="floatingInput">Street</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text"
+                 class="form-control"
+                  id="floatingInput"
+                   placeholder="HouseNumber"
+                   name="HouseNumber"
+                   class="form-control"
+                   required
+                   ngModel
+                   >
+                <label for="floatingInput">House Number</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text"
+                 class="form-control"
+                  id="floatingInput"
+                   placeholder="PostalCode"
+                   name="PostalCode"
+                   class="form-control"
+                   required
+                   ngModel
+                   >
+                <label for="floatingInput">Postal Code</label>
+              </div>
+        </div>
+    </div>
+</form>
+</div>

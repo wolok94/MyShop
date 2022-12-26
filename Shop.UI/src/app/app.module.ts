@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TokenInterceptorService } from './Services/token-interceptor.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TokenInterceptorService } from './Services/token-interceptor.service';
     LoginComponent,
     CategoryComponent,
     ShoppingCartComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, FormsModule
