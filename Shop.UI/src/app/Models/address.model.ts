@@ -4,4 +4,6 @@ export interface AddressModel {
     street : string;
     houseNumber : string;
     postalCode : string;
+
+
 }

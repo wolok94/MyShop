@@ -41,7 +41,7 @@ namespace Shop.Persistence.EF.Configuration
 
                  bp =>
                  {
-                     bp.HasKey(x => new { x.ProductId, x.ShoppingCartId});
+                     bp.HasKey(x => new {x.ProductId, x.ShoppingCartId});
                      bp.Property(x => x.DateOfCreated).HasDefaultValueSql("getutcdate()");
                  }
                 );

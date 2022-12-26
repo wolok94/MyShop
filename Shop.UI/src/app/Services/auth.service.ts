@@ -31,6 +31,8 @@ export class AuthService {
   getUserByNickName(nickName:string){
     return this.httpClient.get<UserModel>("https://localhost:63150/api/customer/"+nickName);
   }
+
+
   
 
 }

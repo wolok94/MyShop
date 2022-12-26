@@ -5,13 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryComponent } from './category/category.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'start', pathMatch:'full'},
   {path: "login", component: LoginComponent},
   {path: 'start', component: ProductListComponent},
   {path: 'category/:id', component: CategoryComponent},
-  {path: 'shoppingCart', component: ShoppingCartComponent}
+  {path: 'shoppingCart', component: ShoppingCartComponent},
+  {path: 'register', component: RegisterComponent}
   
 ];
 
