@@ -6,6 +6,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryComponent } from './category/category.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RegisterComponent } from './register/register.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'start', pathMatch:'full'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'start', component: ProductListComponent},
   {path: 'category/:id', component: CategoryComponent},
   {path: 'shoppingCart', component: ShoppingCartComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path : "createOrder", component : CreateOrderComponent}
   
 ];
 

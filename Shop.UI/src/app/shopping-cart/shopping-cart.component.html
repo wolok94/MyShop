@@ -16,5 +16,5 @@
   </div>
   <div *ngIf="products">
     <h3>Całkowita kwota to: {{priceOfOrder()}}</h3>
-    <button class="btn btn-primary">Zamów</button>
+    <button class="btn btn-primary" (click)="order()">Zamów</button>
   </div>

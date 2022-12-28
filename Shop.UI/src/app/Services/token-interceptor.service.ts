@@ -8,14 +8,23 @@ import { AuthService } from './auth.service';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private inject:Injector) { }
+  constructor() { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authService=this.inject.get(AuthService);
-    let jwtToken = req.clone({
+    const url = "https://localhost:63150/api/Customer/login";
+    
+    if (req.url !== url)
+    {
+      let token = req.clone({
       setHeaders: {
-        Authorization: 'bearer '+authService.token
+        Authorization: `bearer ${localStorage.getItem('token')}`
       }
     });
-    return next.handle(jwtToken);
+    return next.handle(token);
   }
+
+    return next.handle(req);
+
+
+  }
+
 }
