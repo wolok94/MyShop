@@ -13,6 +13,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { TokenInterceptorService } from './Services/token-interceptor.service';
+import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TokenInterceptorService } from './Services/token-interceptor.service';
     CategoryComponent,
     RegisterComponent,
     CreateOrderComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, FormsModule

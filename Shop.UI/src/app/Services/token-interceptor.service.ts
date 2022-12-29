@@ -10,10 +10,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   constructor() { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = "https://localhost:63150/api/Customer/login";
-    
-    if (req.url !== url)
-    {
+
       let token = req.clone({
       setHeaders: {
         Authorization: `bearer ${localStorage.getItem('token')}`
@@ -22,9 +19,8 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(token);
   }
 
-    return next.handle(req);
 
 
   }
 
-}
+
