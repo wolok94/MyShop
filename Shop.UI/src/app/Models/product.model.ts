@@ -1,4 +1,5 @@
 import { CategoryModel } from "./category.model";
+import { CommentModel } from "./comment.model";
 
 export interface ProductModel{
     id:number;
@@ -7,4 +8,5 @@ export interface ProductModel{
     price:number;
     category:CategoryModel;
     imageUrl:string;
+    comments : CommentModel[];
 }

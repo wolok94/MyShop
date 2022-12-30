@@ -1,1 +1,33 @@
-<p>product-detail works!</p>
+<div class="container text-center">
+    <img  [src]="product.imageUrl"  *ngIf="product" >
+
+    <h2>{{product.title}}</h2>
+    <p>Cena: {{product.price}}</p>
+    <button class="btn btn-primary" (click)="buyProduct()" [disabled]="!isLoged">Kup</button>
+    <hr>
+    <div class="description">{{product.description}}</div>
+    <hr>
+    <div class="commentsContainer">
+        <div class="createComment">
+            <form>
+                Komentarze:
+                <textarea class="form-control" id="comments" rows="6"></textarea>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+            </form>
+        </div>
+        <hr>
+        <div class="card-body">
+            <div class="card">
+                <div id="commentsArea" *ngFor="let comment of product.comments">
+                    <div id="comments" >
+                        <div id="userName" class="card-title">{{comment.userName}} <span id="date">{{comment.createdDate | date:'dd-MM-yyyy'}}</span></div>
+
+                        <div id="description" class="card-text">{{comment.description}}</div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

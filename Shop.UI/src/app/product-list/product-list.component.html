@@ -5,15 +5,18 @@
 <hr>
 <div class="row g-3">
   <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of loadedProducts" >
-    <div class="card text-center text-bg-light mb-3" style="width: 200px;" >
-        <img [src]='product.imageUrl'  class="card-img-top img-fluid" [alt]="product.title">
-        <div class="card-body" >
-          <h5 class="card-title">{{product.title}}</h5>
-          <p class="card-text">Cena: {{product.price}} zł</p>
-          <p class="card-text">{{product.description}}</p>
-          <a style="cursor:pointer" class="btn btn-primary " (click)="onBuyClick(product)">Kup</a>
+    <a style="cursor: pointer;" (click)="clickedProduct(product.id, product)">
+      <div class="card text-center text-bg-light mb-3" style="width: 200px;" >
+          <img [src]='product.imageUrl'  class="card-img-top img-fluid" [alt]="product.title">
+          <div class="card-body" >
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">Cena: {{product.price}} zł</p>
+            <p class="card-text">{{product.description | slice:0:30}}</p>
+            <a style="cursor:pointer" class="btn btn-primary " (click)="onBuyClick(product)">Kup</a>
+          </div>
         </div>
-  </div>
+    </a>
+
     </div>
 </div>
 
