@@ -26,6 +26,7 @@ namespace Shop.Persistence.EF.Repositories
             var product = await _dbContext.Products
                 .AsNoTracking()
                 .Include(x => x.Comments)
+                .ThenInclude(x => x.User)
                 .Select(x => new {x.Id, x.Title, x.Description, x.ImageUrl, x.Comments, x.Price})
                 .FirstOrDefaultAsync(x => x.Id == id);
 
