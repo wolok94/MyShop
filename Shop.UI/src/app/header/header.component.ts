@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     get numberOfProducts(){
 
-        if(this.isLoged && this.shoppingCartService.loadedShoppingCart != undefined)
+        if(localStorage.getItem('isLoged') === "true" && this.shoppingCartService.loadedShoppingCart != undefined)
         {
         return this.shoppingCartService.loadedShoppingCart.products.length
 

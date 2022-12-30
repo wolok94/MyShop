@@ -1,0 +1,31 @@
+img {
+    width: 300px;
+    
+}
+.container{
+    margin-top: 5px;
+    border: 2px solid grey;
+    max-width: 600px;
+}
+.description{
+    font-size: 15px;
+    text-align: left;
+    margin-top: 70px;
+}
+.commentsContainer{
+    margin-top: 100px;
+    max-width: 600px;
+}
+
+#userName{
+    text-align: left;
+    font-size: 15px;
+}
+#description{
+    text-align: left;
+    font-size: 20px;
+    margin-top: 15px;
+}
+#date{
+    text-align: center;
+}

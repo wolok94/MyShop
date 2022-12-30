@@ -22,18 +22,12 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm){
     const credentials = form.value;
     this.loginService.logIn(credentials.nickName, credentials.password);
-    if(this.loginService.logIn)
-    {
-    this.loginService.getUserByNickName(credentials.nickName)
-      .subscribe(res => {
-        this.user = res;
-        this.loginService.userSubject.next(this.user);
-      });
-    }
+
       }
 
       register(){
       this.router.navigate(["./register"]);
       }
+
 
 }

@@ -9,6 +9,7 @@ import { UserModel } from '../Models/user.model';
 })
 export class AuthService {
   userSubject = new Subject<UserModel>();
+  user : UserModel;
   constructor(private httpClient: HttpClient, private router:Router) { }
 
 
@@ -24,6 +25,10 @@ export class AuthService {
         localStorage.setItem('token',response);
         this.router.navigate(['']);
         localStorage.setItem("isLoged", true.toString());
+        this.getUserByNickName(nickName).subscribe(res => {
+          this.user = res;
+          this.userSubject.next(this.user);
+        });
       }
 
     });
@@ -31,6 +36,7 @@ export class AuthService {
   getUserByNickName(nickName:string){
     return this.httpClient.get<UserModel>("https://localhost:63150/api/customer/"+nickName);
   }
+
 
 
   

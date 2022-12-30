@@ -1,4 +1,6 @@
-﻿using Shop.Domain.Entities;
+﻿using Shop.Application.DtoModels;
+using Shop.Application.Functions.Comments.Queries.GetInList;
+using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace Shop.Application.Functions.Products.Queries.GetProductDetail
         public string Title { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<UserCommentDto> Comments { get; set; }
         public string ImageUrl { get; set; }
     }
 }
