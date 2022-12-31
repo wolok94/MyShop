@@ -3,12 +3,12 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse " id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto mb-2 mg-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page"  [routerLink]="'product-list'" >Start</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isLoged">
             <a class="nav-link active" aria-current="page" style="cursor: pointer" (click)="onLogin()" >Zaloguj się</a>
           </li>
           <li class="nav-item dropdown">
@@ -19,18 +19,24 @@
               <li><a class="dropdown-item "  *ngFor="let category of loadedCategories" (click)="clickedCategory(category)" >{{category.name}}</a></li>
 
             </ul>
+          </ul>
 
-              <div class="position-fixed top-0 end-0">
-                <li class="nav-item ">
-                  <a  class="nav-link active"
-                  aria-current="page"
-                  style="cursor: pointer"
-                  (click)="shoppingCartClicked()" >
-                  <img src="https://cdn-icons-png.flaticon.com/512/126/126083.png" alt="shopping-cart"> ({{numberOfProducts}})
-                </a>
-                </li>
-              </div>
-        </ul>
+                <ul class="navbar-nav ms-auto mb-2 mg-lg-0">
+                  <li class="nav-item" *ngIf="isLoged">
+                    <a  class="nav-link active text" style="cursor:pointer;" (click)="logout()">Wyloguj się</a>
+                  </li>
+                  <li class="nav-item ">
+                    <a  class="nav-link active"
+                    aria-current="page"
+                    style="cursor: pointer"
+                    (click)="shoppingCartClicked()" >
+                    <img id="shoppingCartimg"src="https://cdn-icons-png.flaticon.com/512/126/126083.png" alt="shopping-cart"> 
+                    <span class="text">({{getNumberOfProducts()}})</span>
+                  </a>
+                  </li>
+                </ul>
+ 
+
       </div>
     </div>
   </nav>

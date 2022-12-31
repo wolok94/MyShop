@@ -10,6 +10,7 @@ import { UserModel } from '../Models/user.model';
 export class AuthService {
   userSubject = new Subject<UserModel>();
   user : UserModel;
+  isLoged = new Subject<boolean>();
   constructor(private httpClient: HttpClient, private router:Router) { }
 
 
@@ -24,10 +25,10 @@ export class AuthService {
       {
         localStorage.setItem('token',response);
         this.router.navigate(['']);
-        localStorage.setItem("isLoged", true.toString());
         this.getUserByNickName(nickName).subscribe(res => {
           this.user = res;
           this.userSubject.next(this.user);
+          this.isLoged.next(true);
         });
       }
 
@@ -35,6 +36,13 @@ export class AuthService {
   }
   getUserByNickName(nickName:string){
     return this.httpClient.get<UserModel>("https://localhost:63150/api/customer/"+nickName);
+  }
+  logout(){
+    this.user = null;
+    this.userSubject.next(null);
+    this.isLoged.next(false);
+    localStorage.removeItem("token");
+
   }
 
 
