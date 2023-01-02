@@ -13,24 +13,25 @@ import { ShoppingCartService } from 'src/app/Services/shopping-cart.service';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   product: ProductModel;
   productSubscription : Subscription;
-  isLoged : boolean;
+  isLoged : boolean = false;
   constructor(private productService : ProductService, private shoppingCartService: ShoppingCartService,
     private authService: AuthService) { 
-    if(this.product === undefined)
-    {
-    this.productSubscription = this.productService.product.subscribe(loadedProduct => {
-      this.product = loadedProduct;
-    });
-    };
+
   }
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
+    if(this.product === undefined)
+    {
+    this.productSubscription = this.productService.product.subscribe(loadedProduct => {
+      this.product = loadedProduct;
+    });
+    };
     this.authService.isLoged.subscribe(res => {
       this.isLoged = res;
-    })
+    });
   }
   buyProduct(){
     this.shoppingCartService.addProductToShoppingCart(this.product).subscribe(response => {

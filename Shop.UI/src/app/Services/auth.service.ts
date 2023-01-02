@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { UserModel } from '../Models/user.model';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { UserModel } from '../Models/user.model';
 export class AuthService {
   userSubject = new Subject<UserModel>();
   user : UserModel;
-  isLoged = new Subject<boolean>();
+  isLoged = new BehaviorSubject<boolean>(false);
   constructor(private httpClient: HttpClient, private router:Router) { }
 
 
