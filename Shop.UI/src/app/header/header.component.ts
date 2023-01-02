@@ -31,7 +31,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.loadedCategories = categories;
         
       });
-      this.isLoged = localStorage.getItem("isLoged") == "true";
+      this.authService.isLoged.subscribe(res => {
+        this.isLoged = res;
+      })
       this.productSub = this.shoppingCartService.addCountOfProducts.subscribe(res => {
         this.shoppingCartService.loadedShoppingCart.products.push(res);
       })
@@ -49,9 +51,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     shoppingCartClicked(){
       this.router.navigate(['shoppingCart']);
     }
-    get numberOfProducts(){
+    getNumberOfProducts(){
 
-        if(localStorage.getItem('isLoged') === "true" && this.shoppingCartService.loadedShoppingCart != undefined)
+        if(this.isLoged && this.shoppingCartService.loadedShoppingCart != undefined)
         {
         return this.shoppingCartService.loadedShoppingCart.products.length
 
@@ -59,6 +61,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         else
         return 0;
 
+    }
+    logout(){
+      this.authService.logout();
+      this.router.navigate(['login']);
     }
 
 

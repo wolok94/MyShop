@@ -6,7 +6,7 @@
           <div class="card-body" >
             <h5 class="card-title">{{product.title}}</h5>
             <p class="card-text">Cena: {{product.price}} zł</p>
-            <p class="card-text">{{product.description}}</p>
+            <p class="card-text">{{product.description | slice:0:20}}</p>
             <button class="btn btn-danger" (click)="deleteProductFromShoppingCart(product)">Usuń</button>
           </div>
     </div>

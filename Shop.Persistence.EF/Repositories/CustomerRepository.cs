@@ -56,8 +56,12 @@ namespace Shop.Persistence.EF.Repositories
             }
 
             var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.NickName == dto.NickName);
+            if (user == null)
+            {
+                throw new NotFoundException("Incorrect nickname or password");
+            }
             var result = _passwordHasher.VerifyHashedPassword((Customer)user, user.hashedPassword, dto.Password);
-            if (result == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Failed)
+            if (user == null || result == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Failed)
             {
                 throw new NotFoundException("Incorrect nickname or password");
             }

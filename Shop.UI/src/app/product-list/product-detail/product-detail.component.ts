@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/Models/product.model';
+import { AuthService } from 'src/app/Services/auth.service';
 import { ProductService } from 'src/app/Services/product.service';
 import { ShoppingCartService } from 'src/app/Services/shopping-cart.service';
 
@@ -12,21 +13,25 @@ import { ShoppingCartService } from 'src/app/Services/shopping-cart.service';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   product: ProductModel;
   productSubscription : Subscription;
-  isLoged : boolean;
-  constructor(private productService : ProductService, private shoppingCartService: ShoppingCartService) { 
-    if(this.product === undefined)
-    {
-    this.productSubscription = this.productService.product.subscribe(loadedProduct => {
-      this.product = loadedProduct;
-    });
-    };
+  isLoged : boolean = false;
+  constructor(private productService : ProductService, private shoppingCartService: ShoppingCartService,
+    private authService: AuthService) { 
+
   }
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.isLoged = localStorage.getItem('isLoged') === 'true';
+    if(this.product === undefined)
+    {
+    this.productSubscription = this.productService.product.subscribe(loadedProduct => {
+      this.product = loadedProduct;
+    });
+    };
+    this.authService.isLoged.subscribe(res => {
+      this.isLoged = res;
+    });
   }
   buyProduct(){
     this.shoppingCartService.addProductToShoppingCart(this.product).subscribe(response => {

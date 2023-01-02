@@ -1,3 +1,9 @@
 .nav-item img{
     width: 50px;
 }
+#shoppingCartimg{
+    text-align: right;
+}
+.text{
+    color:white;
+}
