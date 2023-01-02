@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AddressModel } from '../Models/address.model';
+import { OrderModel } from '../Models/order.model';
+import { RoleModel } from '../Models/role.model';
+import { ShoppingCartModel } from '../Models/shopping-cart.model';
 import { UserModel } from '../Models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userSubject = new Subject<UserModel>();
+  userSubject = new BehaviorSubject<UserModel>(null);
   user : UserModel;
   isLoged = new BehaviorSubject<boolean>(false);
   constructor(private httpClient: HttpClient, private router:Router) { }
@@ -16,6 +20,28 @@ export class AuthService {
 
   get token(){
     return localStorage.getItem('token');
+  }
+
+  autoLogin(){
+    const user : {    id : number;
+      email : string;
+      nickName : string;
+      address : AddressModel;
+      addressId : number;
+      role : RoleModel;
+      roleId : number;
+      firstName : string;
+      lastName : string;
+      orders : OrderModel[];
+      shoppingCart : ShoppingCartModel;} = JSON.parse(localStorage.getItem('user'));
+
+      if(!user){
+        return;
+      }
+
+      this.user = user;
+      this.userSubject.next(this.user);
+      this.isLoged.next(true);
   }
 
   logIn(nickName:string, password:string){
@@ -29,6 +55,7 @@ export class AuthService {
           this.user = res;
           this.userSubject.next(this.user);
           this.isLoged.next(true);
+          localStorage.setItem("user", JSON.stringify(this.user));
         });
       }
 
@@ -42,6 +69,7 @@ export class AuthService {
     this.userSubject.next(null);
     this.isLoged.next(false);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
   }
 

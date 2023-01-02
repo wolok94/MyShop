@@ -5,7 +5,7 @@ import { ProductModel } from "./product.model";
 import { RoleModel } from "./role.model";
 import { ShoppingCartModel } from "./shopping-cart.model";
 
-export interface UserModel {
+export class UserModel {
     id : number;
     email : string;
     nickName : string;
@@ -17,5 +17,4 @@ export interface UserModel {
     lastName : string;
     orders : OrderModel[];
     shoppingCart : ShoppingCartModel;
-    generatedToken : string;
 }
