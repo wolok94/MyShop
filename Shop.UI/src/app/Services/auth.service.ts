@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { AddressModel } from '../Models/address.model';
 import { OrderModel } from '../Models/order.model';
 import { RoleModel } from '../Models/role.model';
 import { ShoppingCartModel } from '../Models/shopping-cart.model';
 import { UserModel } from '../Models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,24 +43,14 @@ export class AuthService {
       this.user = user;
       this.userSubject.next(this.user);
       this.isLoged.next(true);
+
+ 
   }
 
-  logIn(nickName:string, password:string){
-    return this.httpClient.post("https://localhost:63150/api/Customer/login", {nickName, password}, {responseType: 'text'})
-    .subscribe(response => {
-      if (response)
-      {
-        localStorage.setItem('token',response);
-        this.router.navigate(['']);
-        this.getUserByNickName(nickName).subscribe(res => {
-          this.user = res;
-          this.userSubject.next(this.user);
-          this.isLoged.next(true);
-          localStorage.setItem("user", JSON.stringify(this.user));
-        });
-      }
 
-    });
+  logIn(nickName:string, password:string){
+    return this.httpClient.post("https://localhost:63150/api/Customer/login", {nickName, password}, {responseType: 'text'});
+
   }
   getUserByNickName(nickName:string){
     return this.httpClient.get<UserModel>("https://localhost:63150/api/customer/"+nickName);

@@ -12,16 +12,35 @@ import { AuthService } from '../Services/auth.service';
 })
 export class LoginComponent implements OnInit {
   responseData : any;
-
+  errorMessage = new Subject<string>();
   user : UserModel;
+  message :string = '';
   constructor(private loginService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
+    this.errorMessage.subscribe(res => {
+        this.message = res;
+    })
   }
 
   onSubmit(form: NgForm){
     const credentials = form.value;
-    this.loginService.logIn(credentials.nickName, credentials.password);
+    this.loginService.logIn(credentials.nickName, credentials.password).subscribe(response => {
+      if (response)
+      {
+        localStorage.setItem('token',response);
+        this.router.navigate(['']);
+        this.loginService.getUserByNickName(credentials.nickName).subscribe(res => {
+          this.user = res;
+          this.loginService.userSubject.next(this.user);
+          this.loginService.isLoged.next(true);
+          localStorage.setItem("user", JSON.stringify(this.user));
+        });
+      }
+
+    }, error => {
+      this.errorMessage.next(error.error);
+    });
 
       }
 
