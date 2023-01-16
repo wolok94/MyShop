@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductModel } from '../Models/product.model';
 import { ShoppingCartModel } from '../Models/shopping-cart.model';
+import { AuthService } from '../Services/auth.service';
 import { ShoppingCartService } from '../Services/shopping-cart.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { ShoppingCartService } from '../Services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   products: ProductModel[];
-  constructor(private shoppingCartService: ShoppingCartService, private router: Router) { 
+  constructor(private shoppingCartService: ShoppingCartService, private router: Router
+    ,private authService : AuthService) { 
 
   }
 
@@ -20,6 +22,8 @@ export class ShoppingCartComponent implements OnInit {
     .subscribe(shoppingCart => {
       this.shoppingCartService.loadedShoppingCart = shoppingCart;
       this.products = shoppingCart.products;
+      this.authService.user.shoppingCart = this.shoppingCart;
+      this.authService.userSubject.next(this.authService.user);
     })
 
   }
@@ -38,7 +42,10 @@ export class ShoppingCartComponent implements OnInit {
   deleteProductFromShoppingCart(product: ProductModel){
     this.shoppingCartService.deleteProductFromShoppingCart(product)
       .subscribe(response => {
-        console.log(response);
+        let index = this.authService.user.shoppingCart.products
+        .findIndex(x => x.title === product.title);
+        this.authService.user.shoppingCart.products.splice(index,1);
+        this.authService.userSubject.next(this.authService.user);
         this.ngOnInit();
       })
   }

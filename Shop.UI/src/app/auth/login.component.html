@@ -1,6 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
+          <div class="alert alert-danger" *ngIf="message != ''">
+            {{message}}
+          </div>
             <form (ngSubmit)="onSubmit(f)"  #f="ngForm">
                  <div class="form-floating mb-3">
                     <input type="nickName"
@@ -34,8 +37,5 @@
                 </div>
             </form>
         </div>
-    </div>
-    <div class="alert alert-danger" *ngIf="message != ''">
-      {{message}}
     </div>
 </div>

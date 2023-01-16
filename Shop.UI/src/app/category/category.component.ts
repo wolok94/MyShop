@@ -6,6 +6,7 @@ import { ProductModel } from '../Models/product.model';
 import { CategoryService } from '../Services/category.service';
 import { ShoppingCartService } from '../Services/shopping-cart.service';
 import { isEqual } from 'lodash';
+import { AuthService } from '../Services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CategoryComponent implements OnInit{
   products: ProductModel[];
   subscription: Subscription;
   constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService) { }
+    private shoppingCartService: ShoppingCartService, private authService:AuthService) { }
 
 
   ngOnInit(): void {

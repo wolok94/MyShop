@@ -21,7 +21,9 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {
     if (this.user === undefined)
     {
-    this.user = this.auth.user
+    this.auth.userSubject.subscribe(user => {
+      this.user = user;
+    })
     }
     this.user.shoppingCart.products.forEach(product => {
       this.price += product.price;
@@ -33,6 +35,8 @@ export class CreateOrderComponent implements OnInit {
     const typeOfShipment = form.value.flexRadioDefault;
     this.orderService.postOrder(typeOfShipment).subscribe(res => {
       console.log(res);
+      this.auth.user.shoppingCart.products.splice(0);
+      this.auth.userSubject.next(this.auth.user);
     })
 
   }
