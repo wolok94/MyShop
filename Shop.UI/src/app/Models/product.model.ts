@@ -1,7 +1,7 @@
 import { CategoryModel } from "./category.model";
 import { CommentModel } from "./comment.model";
 
-export interface ProductModel{
+export class ProductModel{
     id:number;
     title:string;
     description:string;
@@ -9,4 +9,5 @@ export interface ProductModel{
     category:CategoryModel;
     imageUrl:string;
     comments : CommentModel[];
+    numberOfProducts : number = 1;
 }

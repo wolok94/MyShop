@@ -14,6 +14,7 @@ import { ShoppingCartService } from '../Services/shopping-cart.service';
 export class ProductListComponent implements OnInit {
   loadedProducts: ProductModel[] = [];
   productPagedResultProducts: ProductPagedResultModel;
+  numberOfPages : number;
 
   constructor(private productService: ProductService, private shoppingCartService: ShoppingCartService,
     private route:Router, private activatedRoute: ActivatedRoute) { }
@@ -22,14 +23,10 @@ export class ProductListComponent implements OnInit {
     this.productService.fetchProducts().subscribe(products => {
       this.productPagedResultProducts = products;
       this.loadedProducts = this.productPagedResultProducts['items'];
+      this.numberOfPages = products['TotalPages'];
     })}
 
-    onBuyClick(product: ProductModel){
-      this.shoppingCartService.addProductToShoppingCart(product).subscribe(response => {
-        console.log(response);
-        this.shoppingCartService.addCountOfProducts.next(product);
-      });
-    }
+
 
     clickedProduct(id: number, product:ProductModel){
       this.productService.fetchProductById(product.id).subscribe(res => {

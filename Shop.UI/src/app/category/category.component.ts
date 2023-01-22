@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit{
   chosenCategory: CategoryModel;
   products: ProductModel[];
   subscription: Subscription;
+  numberOfProducts : number = 1;
   constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute,
     private shoppingCartService: ShoppingCartService, private authService:AuthService) { }
 
@@ -31,6 +32,7 @@ export class CategoryComponent implements OnInit{
         this.subscription = this.categoryService.fetchCategory(this.categoryId)
         .subscribe(response => {
         this.products = response['products'];
+        this.products.forEach(x => x.numberOfProducts = 1);
         });
       });
 
@@ -39,10 +41,17 @@ export class CategoryComponent implements OnInit{
   }
 
   buyProduct(product : ProductModel){
-    this.shoppingCartService.addProductToShoppingCart(product).subscribe(response => {
+    this.shoppingCartService.addProductToShoppingCart(product, product.numberOfProducts).subscribe(response => {
       console.log(response);
       this.shoppingCartService.addCountOfProducts.next(product);
     });
+
+  }
+  addNumberOfProducts(product:ProductModel){
+    product.numberOfProducts++;
+  }
+  subtractNumberOfProducts(product:ProductModel){
+    product.numberOfProducts--;
   }
 
 

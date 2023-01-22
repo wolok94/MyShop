@@ -56,6 +56,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(this.isLoged && this.shoppingCartService.loadedShoppingCart != undefined)
         {
         return this.shoppingCartService.loadedShoppingCart.products.length
+        // this.shoppingCartService.loadedShoppingCart.products.reduce((sum, current) => sum + current.numberOfProducts, 0);
+        
+
 
         }
         else

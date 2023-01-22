@@ -8,6 +8,10 @@
             <h5 class="card-title">{{product.title}}</h5>
             <p class="card-text">Cena: {{product.price}} zł</p>
             <p class="card-text">{{product.description | slice:0:20}}</p>
+            <p class="cart-text">
+              <button class="btn btn-primary" (click)="addNumberOfProducts(product)">+</button>
+              {{product.numberOfProducts}}
+              <button class="btn btn-primary" (click)="subtractNumberOfProducts(product)">-</button></p>
             <a style="cursor:pointer" class="btn btn-primary " (click)="buyProduct(product)">Kup</a>
           </div>
         </div>

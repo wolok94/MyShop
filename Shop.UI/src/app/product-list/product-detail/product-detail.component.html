@@ -6,6 +6,10 @@
     <button class="btn btn-primary" (click)="buyProduct()" [disabled]="!isLoged">Kup</button>
     <hr>
     <div class="description">{{product.description}}</div>
+    <p class="cart-text">
+        <button class="btn btn-primary" (click)="addNumberOfProducts(product)">+</button>
+        {{product.numberOfProducts}}
+        <button class="btn btn-primary" (click)="subtractNumberOfProducts(product)">-</button></p>
     <hr>
     <div class="commentsContainer">
         <div class="createComment">
