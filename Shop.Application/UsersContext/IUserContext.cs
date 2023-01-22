@@ -12,5 +12,7 @@ namespace Shop.Application.UsersContext
         int? GetUserId { get; }
         int? GetShoppingCartId { get; }
         ClaimsPrincipal User { get; }
+        public string GetUserName { get; }
+        public string GetUserEmail { get; }
     }
 }
