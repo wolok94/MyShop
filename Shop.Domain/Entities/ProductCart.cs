@@ -10,6 +10,7 @@ namespace Shop.Domain.Entities
     {
         public Product Product { get; set; }
         public int ProductId { get; set; }
+        public int Quantity { get; set; } = 1;
         public ShoppingCart ShoppingCart { get; set; }
         public int ShoppingCartId { get; set; }
         public DateTime DateOfCreated { get; set; }

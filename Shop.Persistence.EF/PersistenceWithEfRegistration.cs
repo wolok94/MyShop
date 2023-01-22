@@ -33,6 +33,7 @@ namespace Shop.Persistence.EF
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+            services.AddScoped<IProductCartRepository, ProductCartRepository>();
             services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<RoleSeeder>();

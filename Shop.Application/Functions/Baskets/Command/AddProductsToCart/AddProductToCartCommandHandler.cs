@@ -26,7 +26,6 @@ namespace Shop.Application.Functions.Baskets.Command.AddProductsToBasket
         }
         public async Task<double> Handle(AddProductToCartCommand request, CancellationToken cancellationToken)
         {
-            var ShoppingCartId = _userContext.GetShoppingCartId;
             var product = request.Product;
             var quantity = request.Quantity;
             var price = await _basketRepository.AddProductToShoppingCart(product, quantity);
