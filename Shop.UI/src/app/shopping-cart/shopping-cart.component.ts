@@ -47,7 +47,7 @@ export class ShoppingCartComponent implements OnInit {
   priceOfOrder(){
     let price = 0;
     for(let product of this.products){
-      price += product.price;
+        price += product.price * product.numberOfProducts;
     }
     return price;
   }

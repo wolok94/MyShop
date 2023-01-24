@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { LoginComponent } from '../auth/login.component';
 import { CategoryModel } from '../Models/category.model';
+import { ShoppingCartModel } from '../Models/shopping-cart.model';
 import { AuthService } from '../Services/auth.service';
 import { CategoryService } from '../Services/category.service';
 import { ProductService } from '../Services/product.service';
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoged : boolean;
   userSub = new Subscription;
   productSub = new Subscription;
+  loadedShoppingCart : ShoppingCartModel;
   constructor(private categoryService: CategoryService, private router: Router,
     private shoppingCartService: ShoppingCartService, private authService : AuthService) { }
   ngOnDestroy(): void {
@@ -33,10 +35,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
       this.authService.isLoged.subscribe(res => {
         this.isLoged = res;
-      })
+      });
       this.productSub = this.shoppingCartService.addCountOfProducts.subscribe(res => {
+        this.shoppingCartService.loadedShoppingCart
         this.shoppingCartService.loadedShoppingCart.products.push(res);
-      })
+      });
+      if (this.authService.user != undefined)
       this.userSub = this.authService.userSubject.subscribe(res => {
         this.shoppingCartService.loadedShoppingCart = res['shoppingCart'];
       });
@@ -55,11 +59,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         if(this.isLoged && this.shoppingCartService.loadedShoppingCart != undefined)
         {
-        return this.shoppingCartService.loadedShoppingCart.products.length
-        // this.shoppingCartService.loadedShoppingCart.products.reduce((sum, current) => sum + current.numberOfProducts, 0);
-        
-
-
+          let countOfProducts = 0;
+          this.shoppingCartService.loadedShoppingCart.products.forEach(x => countOfProducts += x.numberOfProducts);
+          return countOfProducts
         }
         else
         return 0;

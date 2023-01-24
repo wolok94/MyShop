@@ -15,17 +15,28 @@ export class ProductListComponent implements OnInit {
   loadedProducts: ProductModel[] = [];
   productPagedResultProducts: ProductPagedResultModel;
   numberOfPages : number;
+  pages : number[] = [];
+  currentPage : number = 1;
 
   constructor(private productService: ProductService, private shoppingCartService: ShoppingCartService,
-    private route:Router, private activatedRoute: ActivatedRoute) { }
+    private route:Router, private activatedRoute: ActivatedRoute) {
+
+
+     }
 
   ngOnInit(): void {
-    this.productService.fetchProducts().subscribe(products => {
+    this.productService.fetchProducts(1).subscribe(products => {
       this.productPagedResultProducts = products;
       this.loadedProducts = this.productPagedResultProducts['items'];
-      this.numberOfPages = products['TotalPages'];
-    })}
+      this.numberOfPages = products['totalPages'];
+      for (let i = 1; i <= this.numberOfPages; i++) {
+        this.pages.push(i);
+        
+      };
+    })};
 
+
+ 
 
 
     clickedProduct(id: number, product:ProductModel){
@@ -34,5 +45,13 @@ export class ProductListComponent implements OnInit {
       })
       this.route.navigate([id], {relativeTo: this.activatedRoute});
 
+    }
+    fetchProducts(page : number){
+      this.productService.fetchProducts(page).subscribe(products => {
+        this.productPagedResultProducts = products;
+        this.loadedProducts = this.productPagedResultProducts['items'];
+        this.numberOfPages = products['totalPages'];
+      });
+      this.currentPage = page;
     }
 }

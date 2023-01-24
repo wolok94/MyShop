@@ -16,10 +16,10 @@ export class ProductService {
     })
    }
 
-  fetchProducts(){
+  fetchProducts(page : number){
     return this.http.get<ProductPagedResultModel>("https://localhost:63150/api/Product", {params : {
-      PageSize : 10,
-      PageNumber : 1
+      PageSize : 6,
+      PageNumber : page
     }});
     
   }

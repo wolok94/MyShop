@@ -1,5 +1,5 @@
-<div class="container text-center">
-    <img  [src]="product.imageUrl"  *ngIf="product" >
+<div class="container text-center" *ngIf="product">
+    <img  [src]="product.imageUrl" >
 
     <h2>{{product.title}}</h2>
     <p>Cena: {{product.price}}</p>
