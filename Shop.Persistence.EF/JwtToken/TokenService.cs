@@ -20,7 +20,9 @@ namespace Shop.Persistence.EF.JwtToken
                 new Claim(ClaimTypes.Name, user.NickName),
                 new Claim(ClaimTypes.Role, user.Role.Name),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim("BasketId", shoppingCart.Id.ToString())
+                new Claim("BasketId", shoppingCart.Id.ToString()),
+                new Claim("NickName", user.NickName),
+                new Claim("Email", user.Email)
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));

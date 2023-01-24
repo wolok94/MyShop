@@ -14,6 +14,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   product: ProductModel;
   productSubscription : Subscription;
   isLoged : boolean = false;
+  numberOfProducts : number;
   constructor(private productService : ProductService, private shoppingCartService: ShoppingCartService,
     private authService: AuthService) { 
 
@@ -27,17 +28,25 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     {
     this.productSubscription = this.productService.product.subscribe(loadedProduct => {
       this.product = loadedProduct;
+      this.product.numberOfProducts = 1;
     });
     };
     this.authService.isLoged.subscribe(res => {
       this.isLoged = res;
     });
+
   }
   buyProduct(){
-    this.shoppingCartService.addProductToShoppingCart(this.product).subscribe(response => {
+    this.shoppingCartService.addProductToShoppingCart(this.product, this.product.numberOfProducts).subscribe(response => {
       console.log(response);
       this.shoppingCartService.addCountOfProducts.next(this.product);
     });
+  }
+    addNumberOfProducts(product:ProductModel){
+    product.numberOfProducts++;
+  }
+  subtractNumberOfProducts(product:ProductModel){
+    product.numberOfProducts--;
   }
   }
 

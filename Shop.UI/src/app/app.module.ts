@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { TokenInterceptorService } from './Services/token-interceptor.service';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
     ProductDetailComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, FormsModule
+    BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, NgxPaginationModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true}],
   bootstrap: [AppComponent]

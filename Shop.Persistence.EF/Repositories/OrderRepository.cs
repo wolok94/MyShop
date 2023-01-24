@@ -5,6 +5,7 @@ using Shop.Application.Contracts.Persistence;
 using Shop.Application.Functions.Baskets.Command.DeleteProductsFromCart;
 using Shop.Application.Functions.Baskets.Query.GetDetailBasket;
 using Shop.Application.Functions.Baskets.Query.GetShoppingCart;
+using Shop.Application.UsersContext;
 using Shop.Domain.Entities;
 using Shop.Persistence.EF.SendingEmail;
 using System;
@@ -19,32 +20,39 @@ namespace Shop.Persistence.EF.Repositories
     {
         private readonly ShopDbContext _dbContext;
         private readonly IEmail _email;
-        private readonly IMediator _mediator;
+        private readonly IUserContext _userContext;
 
-
-        public OrderRepository(ShopDbContext dbContext, IEmail email, IMediator mediator) : base(dbContext)
+        public OrderRepository(ShopDbContext dbContext, IEmail email, IUserContext userContext) : base(dbContext)
         {
             _dbContext = dbContext;
             _email = email;
-            _mediator = mediator;
+            _userContext = userContext;
         }
 
         public async Task<OrderToSend> CreateOrder(OrderToSend order, int id)
         {
-            await _dbContext.Orders.AddAsync(order);
-            await _dbContext.SaveChangesAsync();
-            var shoppingCart = await _mediator.Send(new GetShoppingCartQuery());
-            var orderToSend = await _dbContext.Orders
-                .Include(x => x.User)
-                .Include(x => x.Products)
-                .FirstOrDefaultAsync(x => x.Id == order.Id);
-            orderToSend.Products = shoppingCart.Products;
-            orderToSend.Price = orderToSend.Products.Sum(x => x.Price);
-            await _dbContext.SaveChangesAsync();
-            var nickName = orderToSend.User.NickName;
-            var message = new MessageParams(order.User.Email, "Zamówienie", orderToSend.User.NickName, await FileReader.ReadOrderFile(nickName, orderToSend.Products, orderToSend.Price));
+            var shoppingCart = await _dbContext.ShoppingCarts
+                .Include(x => x.Products).FirstOrDefaultAsync(x => x.Id == id);
+
+            order.Products = shoppingCart.Products;
+            var productCarts = await _dbContext.ProductCart.Where(x => x.ShoppingCartId == shoppingCart.Id).ToListAsync();
+            order.Price = order.Products.Sum(x => {
+                foreach (var productCart in productCarts)
+                {
+                        if (x.Id == productCart.ProductId)
+                        {
+                            return x.Price * productCart.Quantity;
+                        }
+                 }
+                return x.Price;
+            });
+            var nickName = _userContext.GetUserName;
+            var email = _userContext.GetUserEmail;
+            var message = new MessageParams(email, "Zamówienie", nickName, await FileReader.ReadOrderFile(nickName, order.Products, order.Price));
             await _email.SendEmail(message);
-            await _mediator.Send(new DeleteProductsFromCartCommand() { ShoppingCartId = id });
+            await _dbContext.Orders.AddAsync(order);
+            shoppingCart.Products.Clear();
+            await _dbContext.SaveChangesAsync();
             return order;
         }
     }

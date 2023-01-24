@@ -26,6 +26,9 @@ export class CreateOrderComponent implements OnInit {
     })
     }
     this.user.shoppingCart.products.forEach(product => {
+      if(product.numberOfProducts > 1){
+        this.price += (product.price * product.numberOfProducts);
+      }
       this.price += product.price;
     });
 

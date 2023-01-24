@@ -1,11 +1,15 @@
-<div class="container text-center">
-    <img  [src]="product.imageUrl"  *ngIf="product" >
+<div class="container text-center" *ngIf="product">
+    <img  [src]="product.imageUrl" >
 
     <h2>{{product.title}}</h2>
     <p>Cena: {{product.price}}</p>
     <button class="btn btn-primary" (click)="buyProduct()" [disabled]="!isLoged">Kup</button>
     <hr>
     <div class="description">{{product.description}}</div>
+    <p class="cart-text">
+        <button class="btn btn-primary" (click)="addNumberOfProducts(product)">+</button>
+        {{product.numberOfProducts}}
+        <button class="btn btn-primary" (click)="subtractNumberOfProducts(product)">-</button></p>
     <hr>
     <div class="commentsContainer">
         <div class="createComment">

@@ -5,6 +5,7 @@ using Shop.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,11 +27,23 @@ namespace Shop.Persistence.EF.Repositories
             var shoppingCart = await GetShoppingCart();
 
             var productToUpdate = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
-            shoppingCart.Products.Add(productToUpdate);
-            productToUpdate.InStock -= quantity;
+
+            if (!_dbContext.ProductCart.Any(x => x.ShoppingCartId == shoppingCart.Id &&
+            x.ProductId == product.Id))
+            {
+                shoppingCart.Products.Add(productToUpdate);
+                productToUpdate.InStock -= quantity;
+                await _dbContext.SaveChangesAsync();
+            }
+
+            var existedProduct = await _dbContext.ProductCart
+                .FirstOrDefaultAsync(x => x.ProductId == product.Id &&
+                x.ShoppingCartId == shoppingCart.Id);
+
+            existedProduct.Quantity *= quantity;
             await _dbContext.SaveChangesAsync();
 
-            
+
             var price = shoppingCart.Products.Sum(x => x.Price);
             return price;
 
@@ -46,6 +59,7 @@ namespace Shop.Persistence.EF.Repositories
         {
             var shoppingCartId = _userContext.GetShoppingCartId;
             var shoppingCart = await _dbContext.ShoppingCarts
+                .AsNoTracking()
                 .Include(x => x.Products)
                 .ThenInclude(p => p.Category)
                 .Include(u => u.Customer)
