@@ -68,7 +68,7 @@ namespace Shop.Persistence.EF.Repositories
                 .ToListAsync();
 
             
-            var resultProducts = new PagedResult<Product>(products, products.Count(), productQuery.PageSize, productQuery.PageNumber);
+            var resultProducts = new PagedResult<Product>(products, basicQuery.Count(), productQuery.PageSize, productQuery.PageNumber);
 
             return resultProducts;
                 

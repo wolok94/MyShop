@@ -40,7 +40,7 @@ namespace Shop.Persistence.EF.Repositories
                 .FirstOrDefaultAsync(x => x.ProductId == product.Id &&
                 x.ShoppingCartId == shoppingCart.Id);
 
-            existedProduct.Quantity += quantity;
+            existedProduct.Quantity *= quantity;
             await _dbContext.SaveChangesAsync();
 
 
